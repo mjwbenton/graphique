@@ -1,0 +1,19 @@
+{
+  "name": "@mattb.tech/blank-canvas",
+  "version": "1.0.0",
+  "description": "Sketchpad for creating art",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "seed-random": "^2.2.0",
+    "simplex-noise": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.27",
+    "@types/seed-random": "^2.2.0",
+    "typescript": "^3.9.7"
+  }
+}
