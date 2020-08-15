@@ -2,15 +2,12 @@ import { createCanvas } from "canvas";
 import { createWriteStream } from "fs";
 import seed from "seed-random";
 import SimplexNoise from "simplex-noise";
+import path from "path";
 
-const CANVAS_SIZE = 1000;
-const NOISE_MAX = 8.0;
-const NOISE_MIN = -5.0;
-const RINGS = 10;
-const DISTANCE = 8.0;
-const LARGEST_RADIUS = 200;
+const SKETCH = "1";
+const SEED = "cheese";
 
-const random = seed("1234sdfdfg");
+const random = seed(SEED);
 const noise = new SimplexNoise(random);
 
 function linearScale(
@@ -21,6 +18,20 @@ function linearScale(
   const percent = (value - currmin) / (currmax - currmin);
   return (newmax - newmin) * percent + newmin;
 }
+
+function scaledRandom(min: number, max: number) {
+  return linearScale(random(), [0, 1], [min, max]);
+}
+
+const CANVAS_SIZE_X = 3000;
+const CANVAS_SIZE_Y = 2400;
+const LARGEST_RADIUS = 1000;
+const CIRCLE_POINTS = 720;
+const SMALLEST_RADIUS = 400;
+const RINGS = Math.floor(scaledRandom(5, 30));
+const DISTANCE = (LARGEST_RADIUS - SMALLEST_RADIUS) / RINGS;
+const NOISE_MAX = scaledRandom(DISTANCE / 5, DISTANCE / 0.5);
+const NOISE_MIN = NOISE_MAX * -1;
 
 const A = 200;
 const SCALING_MAX = 180 ** 2 * A;
@@ -37,13 +48,10 @@ function pointsForCircle(
   radius: number,
   [centerx, centery]: [number, number]
 ): [number, number][] {
-  return [...Array(360).keys()].map((deg) => {
+  return [...Array(CIRCLE_POINTS).keys()].map((point) => {
+    const deg = linearScale(point, [0, CIRCLE_POINTS], [0, 360]);
     const noiseIndexDegs = (deg + radius) % 360;
     const radians = deg * (Math.PI / 180);
-    console.log({
-      deg,
-      noise: noiseScale(deg),
-    });
     const noisyRadius =
       radius +
       linearScale(
@@ -58,27 +66,42 @@ function pointsForCircle(
   });
 }
 
-const canvas = createCanvas(CANVAS_SIZE, CANVAS_SIZE);
+const canvas = createCanvas(CANVAS_SIZE_X, CANVAS_SIZE_Y);
 const ctx = canvas.getContext("2d");
-ctx.fillStyle = "#FFFFFF";
-ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
+// Off-white background
+ctx.fillStyle = `hsl(${scaledRandom(0, 360)}, 30%, 95%)`;
+ctx.fillRect(0, 0, CANVAS_SIZE_X, CANVAS_SIZE_Y);
+
+// Rings
+const baseColor = scaledRandom(0, 360);
+const saturation = scaledRandom(30, 90);
 [...Array(RINGS).keys()].forEach((i) => {
   const radius = LARGEST_RADIUS - i * DISTANCE;
-  ctx.strokeStyle = "rgba(0,0,0,0.5)";
+  ctx.fillStyle = `hsl(${baseColor}, ${saturation}%, ${linearScale(
+    radius,
+    [SMALLEST_RADIUS, LARGEST_RADIUS],
+    [40, 90]
+  )}%)`;
   ctx.beginPath();
-  pointsForCircle(radius, [CANVAS_SIZE / 2, CANVAS_SIZE / 2]).forEach(
-    ([x, y], i, arr) => {
+  pointsForCircle(radius, [CANVAS_SIZE_X / 2, CANVAS_SIZE_Y / 2]).forEach(
+    ([x, y]) => {
       ctx.lineTo(x, y);
-      // Connect back to the first point
-      if (i == arr.length - 1) {
-        ctx.lineTo(arr[0][0], arr[0][1]);
-      }
     }
   );
-  ctx.stroke();
+  ctx.closePath();
+  ctx.fill();
 });
 
-const output = createWriteStream(`${__dirname}/test.png`);
+// Sign
+const sign = `mattb / ${SKETCH} / ${SEED}`;
+ctx.font = "40px Fira Code";
+ctx.fillStyle = "rgba(0,0,0,0.3)";
+const { width } = ctx.measureText(sign);
+ctx.fillText(sign, CANVAS_SIZE_X - (50 + width), CANVAS_SIZE_Y - 50);
+
+const output = createWriteStream(
+  path.join(__dirname, "..", `${SKETCH}-${SEED}.png`)
+);
 canvas.createPNGStream().pipe(output);
 output.on("finish", () => console.log("Finished!"));
