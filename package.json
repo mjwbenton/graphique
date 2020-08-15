@@ -4,6 +4,7 @@
   "description": "Gernerative art",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "lerna": "^3.22.1"
+  }
 }
