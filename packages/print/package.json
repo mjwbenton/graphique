@@ -5,7 +5,7 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "bin": {
-    "graphique-print": "./dist/bin/print"
+    "graphique-print": "./dist/bin/print.js"
   },
   "files": [
     "package.json",

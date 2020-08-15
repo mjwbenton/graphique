@@ -5,6 +5,8 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "dependencies": {
+    "@mattb.tech/graphique-print": "file:packages/print",
+    "@mattb.tech/graphique-sketches": "file:packages/sketches",
     "lerna": "^3.22.1"
   }
 }
