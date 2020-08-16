@@ -1,20 +1,14 @@
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import dynamicSketchComponent from "../src/dynamicSketchComponent";
+import Link from "next/link";
 
 export default function Home() {
-  const DynamicSketchComponent = dynamic(dynamicSketchComponent("1"), {
-    ssr: false,
-  });
-
   return (
     <>
-      <Head>
-        <title>Graphique</title>
-      </Head>
-      <div>
-        <DynamicSketchComponent />
-      </div>
+      <Link href="/s/[sketchName]/[seed]" as="/s/1/test">
+        <a>1</a>
+      </Link>
+      <Link href="/s/[sketchName]/[seed]" as="/s/2/123">
+        <a>2</a>
+      </Link>
     </>
   );
 }

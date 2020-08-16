@@ -9,9 +9,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
-    "start": "next start"
+    "build": "next build && next export",
+    "dev": "next dev"
   },
   "dependencies": {
     "@mattb.tech/graphique-sketches": "*",

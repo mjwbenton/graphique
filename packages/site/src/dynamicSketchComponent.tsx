@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef } from "react";
 import useWindowSize from "./useWindowSize";
 
 export default async function dynamicSketchComponent(
-  sketchName: string
+  sketchName: string,
+  seed: string
 ): Promise<React.ComponentType<{}>> {
   const { sketch } = await import(
     `@mattb.tech/graphique-sketches/sketches/${sketchName}/index.js`
@@ -14,7 +15,7 @@ export default async function dynamicSketchComponent(
       const canvas = canvasEl.current!;
       canvas.width = width;
       canvas.height = height;
-      sketch({ canvas, seed: "test" });
+      sketch({ canvas, seed });
     });
     return <canvas ref={canvasEl}></canvas>;
   };
