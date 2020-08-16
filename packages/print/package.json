@@ -14,7 +14,10 @@
   "scripts": {
     "build": "tsc"
   },
-  "dependencies": {},
+  "dependencies": {
+    "canvas": "^2.6.1",
+    "@mattb.tech/graphique-sketches": "*"
+  },
   "devDependencies": {
     "typescript": "^3.9.7"
   }
