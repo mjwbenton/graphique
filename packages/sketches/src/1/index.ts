@@ -97,7 +97,7 @@ export function sketch({
 
   // Sign
   const sign = `mattb / 1 / ${seed}`;
-  ctx.font = "40px Fira Code";
+  ctx.font = "40px Consolas, Monaco, monospace";
   ctx.fillStyle = "rgba(0,0,0,0.3)";
   const { width } = ctx.measureText(sign);
   ctx.fillText(sign, canvas.width - (50 + width), canvas.height - 50);
