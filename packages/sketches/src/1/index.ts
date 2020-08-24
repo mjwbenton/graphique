@@ -1,9 +1,7 @@
 import seedRandom from "seed-random";
 import SimplexNoise from "simplex-noise";
 
-const LARGEST_RADIUS = 1000;
 const CIRCLE_POINTS = 720;
-const SMALLEST_RADIUS = 400;
 
 function linearScale(
   value: number,
@@ -33,6 +31,8 @@ export function sketch({
   seed: string;
 }) {
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
+  const max_radius = Math.min(canvas.height, canvas.width) * 0.45;
+  const min_radius = Math.min(canvas.height, canvas.width) * 0.2;
   const random = seedRandom(seed);
   const noise = new SimplexNoise(random);
 
@@ -41,8 +41,7 @@ export function sketch({
   }
 
   const numberOfCircles = Math.floor(scaledRandom(5, 30));
-  const distanceBetweenCircles =
-    (LARGEST_RADIUS - SMALLEST_RADIUS) / numberOfCircles;
+  const distanceBetweenCircles = (max_radius - min_radius) / numberOfCircles;
   const maxNoiseOffset = scaledRandom(
     distanceBetweenCircles / 5,
     distanceBetweenCircles / 0.5
@@ -79,10 +78,10 @@ export function sketch({
   const baseColor = scaledRandom(0, 360);
   const saturation = scaledRandom(30, 90);
   [...Array(numberOfCircles).keys()].forEach((i) => {
-    const radius = LARGEST_RADIUS - i * distanceBetweenCircles;
+    const radius = max_radius - i * distanceBetweenCircles;
     ctx.fillStyle = `hsl(${baseColor}, ${saturation}%, ${linearScale(
       radius,
-      [SMALLEST_RADIUS, LARGEST_RADIUS],
+      [min_radius, max_radius],
       [40, 90]
     )}%)`;
     ctx.beginPath();
