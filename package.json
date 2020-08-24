@@ -9,6 +9,7 @@
   },
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "vercel-build": "lerna bootstrap && lerna run build"
   }
 }
