@@ -11,12 +11,13 @@ export default async function dynamicSketchComponent(
   return () => {
     const canvasEl = useRef<HTMLCanvasElement>(null);
     const { width, height } = useWindowSize();
+    const devicePixelRatio = window.devicePixelRatio ?? 1;
     useLayoutEffect(() => {
       const canvas = canvasEl.current!;
-      canvas.width = width;
-      canvas.height = height;
+      canvas.width = width * devicePixelRatio;
+      canvas.height = height * devicePixelRatio;
       sketch({ canvas, seed });
     });
-    return <canvas ref={canvasEl}></canvas>;
+    return <canvas style={{ height, width }} ref={canvasEl}></canvas>;
   };
 }
