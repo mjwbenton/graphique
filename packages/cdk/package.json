@@ -1,0 +1,24 @@
+{
+  "name": "@mattb.tech/graphique-cdk",
+  "version": "0.1.0",
+  "description": "Deployment of the website",
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "deploy": "npm run build && cdk deploy --profile mattb.tech-deploy --require-approval never",
+    "diff": "npm run build && cdk diff --profile mattb.tech-deploy"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@aws-cdk/aws-route53": "^1.59.0",
+    "@aws-cdk/core": "^1.59.0",
+    "@types/node": "^14.6.0",
+    "aws-cdk": "^1.59.0",
+    "typescript": "^3.9.7"
+  }
+}
