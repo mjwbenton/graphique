@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "next build && next export",
+    "build": "next build",
     "dev": "next dev"
   },
   "dependencies": {
