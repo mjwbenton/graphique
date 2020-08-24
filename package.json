@@ -1,14 +1,29 @@
 {
-  "name": "@mattb.tech/graphique",
+  "name": "@mattb.tech/graphique-site",
   "version": "0.1.0",
-  "description": "Gernerative art",
+  "description": "Website to show sketches",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
-  "dependencies": {
-    "lerna": "^3.22.1"
-  },
+  "files": [
+    "package.json",
+    "dist"
+  ],
   "scripts": {
     "bootstrap": "lerna exec npm install",
-    "build": "lerna run build"
+    "build": "lerna run build && next build",
+    "dev": "next dev",
+    "vercel-build": "npm run bootstrap && npm run build"
+  },
+  "dependencies": {
+    "@mattb.tech/graphique-sketches": "file://./packages/sketches/",
+    "canvas": "^2.6.1",
+    "next": "^9.5.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.46",
+    "typescript": "^3.9.7",
+    "lerna": "^3.22.1"
   }
 }
