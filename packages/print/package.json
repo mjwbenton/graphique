@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "canvas": "^2.6.1",
-    "@mattb.tech/graphique-sketches": "*"
+    "@mattb.tech/graphique-sketches": "file://../sketches/"
   },
   "devDependencies": {
     "typescript": "^3.9.7"

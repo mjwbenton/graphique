@@ -10,10 +10,11 @@
   ],
   "scripts": {
     "build": "next build",
-    "dev": "next dev"
+    "dev": "next dev",
+    "vercel-build": "cd ../../ && npm run bootstrap && npm run build"
   },
   "dependencies": {
-    "@mattb.tech/graphique-sketches": "*",
+    "@mattb.tech/graphique-sketches": "file://../sketches/",
     "canvas": "^2.6.1",
     "next": "^9.5.2",
     "react": "^16.13.1",
