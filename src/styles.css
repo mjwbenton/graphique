@@ -4,3 +4,17 @@
   overflow: hidden;
   font-family: Consolas, Monaco, monospace;
 }
+
+a {
+  text-decoration: none;
+}
+
+.layout {
+  display: flex;
+}
+
+.sketch {
+  margin: 1em;
+  padding: 1em;
+  border: 1px solid #222;
+}
