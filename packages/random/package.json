@@ -1,18 +1,21 @@
 {
-  "name": "@mattb.tech/graphique-sketches",
+  "name": "@mattb.tech/graphique-random",
   "version": "0.1.0",
-  "description": "Gernerative art",
+  "description": "Tools for randomness",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "dist"
+  ],
   "scripts": {
     "build": "tsc"
   },
   "dependencies": {
-    "@mattb.tech/graphique-sign": "file://../sign",
-    "@mattb.tech/graphique-maths": "file://../maths",
-    "@mattb.tech/graphique-random": "file://../random",
     "seed-random": "^2.2.0",
-    "simplex-noise": "^2.4.0"
+    "@mattb.tech/graphique-maths": "file://../maths"
   },
   "devDependencies": {
     "@types/seed-random": "^2.2.0",

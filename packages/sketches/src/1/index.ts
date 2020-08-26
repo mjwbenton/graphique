@@ -1,19 +1,11 @@
-import seedRandom from "seed-random";
 import SimplexNoise from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
+import { linearScale } from "@mattb.tech/graphique-maths";
+import random, { resetRandomness } from "@mattb.tech/graphique-random";
 
 const SKETCH_ID = 1;
 
 const CIRCLE_POINTS = 720;
-
-function linearScale(
-  value: number,
-  [currmin, currmax]: [number, number],
-  [newmin, newmax]: [number, number]
-) {
-  const percent = (value - currmin) / (currmax - currmin);
-  return (newmax - newmin) * percent + newmin;
-}
 
 const A = 200;
 const SCALING_MAX = 180 ** 2 * A;
@@ -36,16 +28,12 @@ export function sketch({
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const max_radius = Math.min(canvas.height, canvas.width) * 0.45;
   const min_radius = Math.min(canvas.height, canvas.width) * 0.2;
-  const random = seedRandom(seed);
-  const noise = new SimplexNoise(random);
+  resetRandomness(seed);
+  const noise = new SimplexNoise(random.next);
 
-  function scaledRandom(min: number, max: number) {
-    return linearScale(random(), [0, 1], [min, max]);
-  }
-
-  const numberOfCircles = Math.floor(scaledRandom(5, 30));
+  const numberOfCircles = Math.floor(random.scaled(5, 30));
   const distanceBetweenCircles = (max_radius - min_radius) / numberOfCircles;
-  const maxNoiseOffset = scaledRandom(
+  const maxNoiseOffset = random.scaled(
     distanceBetweenCircles / 5,
     distanceBetweenCircles / 0.5
   );
@@ -74,12 +62,12 @@ export function sketch({
   }
 
   // Off-white background
-  ctx.fillStyle = `hsl(${scaledRandom(0, 360)}, 30%, 95%)`;
+  ctx.fillStyle = `hsl(${random.scaled(0, 360)}, 30%, 95%)`;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Rings
-  const baseColor = scaledRandom(0, 360);
-  const saturation = scaledRandom(30, 90);
+  const baseColor = random.scaled(0, 360);
+  const saturation = random.scaled(30, 90);
   [...Array(numberOfCircles).keys()].forEach((i) => {
     const radius = max_radius - i * distanceBetweenCircles;
     ctx.fillStyle = `hsl(${baseColor}, ${saturation}%, ${linearScale(

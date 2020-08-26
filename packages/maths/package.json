@@ -1,0 +1,20 @@
+{
+  "name": "@mattb.tech/graphique-maths",
+  "version": "0.1.0",
+  "description": "Bits of reusable maths",
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
