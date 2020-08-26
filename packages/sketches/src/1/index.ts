@@ -1,5 +1,8 @@
 import seedRandom from "seed-random";
 import SimplexNoise from "simplex-noise";
+import sign from "@mattb.tech/graphique-sign";
+
+const SKETCH_ID = 1;
 
 const CIRCLE_POINTS = 720;
 
@@ -94,10 +97,5 @@ export function sketch({
     ctx.fill();
   });
 
-  // Sign
-  const sign = `mattb / 1 / ${seed}`;
-  ctx.font = "40px Consolas, Monaco, monospace";
-  ctx.fillStyle = "rgba(0,0,0,0.3)";
-  const { width } = ctx.measureText(sign);
-  ctx.fillText(sign, canvas.width - (50 + width), canvas.height - 50);
+  sign(SKETCH_ID, seed)(ctx);
 }

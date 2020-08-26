@@ -8,6 +8,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@mattb.tech/graphique-sign": "file://../sign",
     "canvas": "^2.6.1",
     "seed-random": "^2.2.0",
     "simplex-noise": "^2.4.0"
