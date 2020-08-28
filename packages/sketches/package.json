@@ -8,13 +8,15 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@mattb.tech/graphique-sign": "file://../sign",
     "@mattb.tech/graphique-maths": "file://../maths",
     "@mattb.tech/graphique-random": "file://../random",
+    "@mattb.tech/graphique-sign": "file://../sign",
+    "geometric": "^2.2.3",
     "seed-random": "^2.2.0",
     "simplex-noise": "^2.4.0"
   },
   "devDependencies": {
+    "@types/geometric": "^2.2.0",
     "@types/seed-random": "^2.2.0",
     "typescript": "^3.9.7"
   }
