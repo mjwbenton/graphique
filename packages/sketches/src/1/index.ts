@@ -25,10 +25,10 @@ export function sketch({
   canvas: HTMLCanvasElement;
   seed: string;
 }) {
+  resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const max_radius = Math.min(canvas.height, canvas.width) * 0.45;
   const min_radius = Math.min(canvas.height, canvas.width) * 0.2;
-  resetRandomness(seed);
   const noise = new SimplexNoise(random.next);
 
   const numberOfCircles = Math.floor(random.scaled(5, 30));
