@@ -16,10 +16,13 @@
   },
   "dependencies": {
     "@mattb.tech/graphique-sketches": "file://./packages/sketches/",
+    "autoprefixer": "^10.1.0",
     "canvas": "^2.6.1",
-    "next": "^9.5.2",
+    "next": "^10.0.3",
+    "postcss": "^8.2.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@types/react": "^16.9.46",
