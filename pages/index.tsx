@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-function Sketch({ sketch }) {
+function Sketch({ sketch }: { sketch: string }) {
   return (
     <div className="p-4 border border-blue-500">
       <Link href="/[sketchName]/[seed]" as={`/${sketch}/${sketch}`}>

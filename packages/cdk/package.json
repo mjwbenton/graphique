@@ -9,7 +9,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "../../scripts/build.sh",
+    "clean": "../../scripts/clean.sh",
     "deploy": "npm run build && cdk deploy --profile mattb.tech-deploy --require-approval never",
     "diff": "npm run build && cdk diff --profile mattb.tech-deploy"
   },

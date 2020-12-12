@@ -5,7 +5,8 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "tsc"
+    "build": "../../scripts/build.sh",
+    "clean": "../../scripts/clean.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-maths": "file://../maths",

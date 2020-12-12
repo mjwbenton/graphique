@@ -12,7 +12,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "../../scripts/build.sh",
+    "clean": "../../scripts/clean.sh"
   },
   "dependencies": {
     "canvas": "^2.6.1",
