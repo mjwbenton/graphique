@@ -6,7 +6,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "../../scripts/build.sh",
-    "clean": "../../scripts/clean.sh"
+    "clean": "../../scripts/clean.sh",
+    "watch": "../../scripts/watch.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-maths": "file://../maths",
