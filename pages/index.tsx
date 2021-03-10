@@ -17,6 +17,7 @@ export default function Home() {
       <div className="flex space-x-8">
         <Sketch sketch="1" />
         <Sketch sketch="2" />
+        <Sketch sketch="3" />
       </div>
     </div>
   );
