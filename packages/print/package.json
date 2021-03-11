@@ -1,6 +1,7 @@
 {
   "name": "@mattb.tech/graphique-print",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
   "description": "Print sketches",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
@@ -16,8 +17,8 @@
     "clean": "../../scripts/clean.sh"
   },
   "dependencies": {
-    "canvas": "^2.6.1",
-    "@mattb.tech/graphique-sketches": "file://../sketches/"
+    "@mattb.tech/graphique-sketches": "1.0.0",
+    "canvas": "^2.6.1"
   },
   "devDependencies": {
     "typescript": "^3.9.7"

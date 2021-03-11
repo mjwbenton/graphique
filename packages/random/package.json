@@ -1,6 +1,7 @@
 {
   "name": "@mattb.tech/graphique-random",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
   "description": "Tools for randomness",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
@@ -15,8 +16,8 @@
     "clean": "../../scripts/clean.sh"
   },
   "dependencies": {
-    "seed-random": "^2.2.0",
-    "@mattb.tech/graphique-maths": "file://../maths"
+    "@mattb.tech/graphique-maths": "1.0.0",
+    "seed-random": "^2.2.0"
   },
   "devDependencies": {
     "@types/seed-random": "^2.2.0",

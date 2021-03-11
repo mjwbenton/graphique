@@ -1,6 +1,7 @@
 {
   "name": "@mattb.tech/graphique-maths",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
   "description": "Bits of reusable maths",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",

@@ -1,6 +1,7 @@
 {
   "name": "@mattb.tech/graphique-sketches",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
   "description": "Gernerative art",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
@@ -10,9 +11,9 @@
     "watch": "../../scripts/watch.sh"
   },
   "dependencies": {
-    "@mattb.tech/graphique-maths": "file://../maths",
-    "@mattb.tech/graphique-random": "file://../random",
-    "@mattb.tech/graphique-sign": "file://../sign",
+    "@mattb.tech/graphique-sign": "1.0.0",
+    "@mattb.tech/graphique-random": "1.0.0",
+    "@mattb.tech/graphique-maths": "1.0.0",
     "geometric": "^2.2.3",
     "seed-random": "^2.2.0",
     "simplex-noise": "^2.4.0"

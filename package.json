@@ -1,33 +1,15 @@
 {
-  "name": "@mattb.tech/graphique-site",
+  "name": "@mattb.tech/graphique",
   "version": "0.1.0",
-  "description": "Website to show sketches",
+  "private": true,
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
-  "files": [
-    "package.json",
-    "dist"
+  "workspaces": [
+    "./packages/*"
   ],
   "scripts": {
-    "clean": "lerna run clean && rm -Rf node_modules && rm -Rf .next",
-    "bootstrap": "lerna exec npm install",
-    "build": "lerna run build && next build",
-    "dev": "next dev",
-    "vercel-build": "npm run bootstrap && npm run build"
-  },
-  "dependencies": {
-    "@mattb.tech/graphique-sketches": "file://./packages/sketches/",
-    "autoprefixer": "^10.1.0",
-    "canvas": "^2.6.1",
-    "next": "^10.0.3",
-    "postcss": "^8.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "tailwindcss": "^2.0.2"
-  },
-  "devDependencies": {
-    "@types/react": "^16.9.46",
-    "typescript": "^3.9.7",
-    "lerna": "^3.22.1"
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
+    "dev": "yarn workspace @mattb.tech/graphique-site run dev"
   }
 }

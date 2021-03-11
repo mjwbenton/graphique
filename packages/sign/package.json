@@ -1,6 +1,7 @@
 {
   "name": "@mattb.tech/graphique-sign",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "private": true,
   "description": "Sign sketches",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
