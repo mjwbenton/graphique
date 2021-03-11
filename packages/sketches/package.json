@@ -8,12 +8,14 @@
   "scripts": {
     "build": "../../scripts/build.sh",
     "clean": "../../scripts/clean.sh",
-    "watch": "../../scripts/watch.sh"
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
   },
   "dependencies": {
-    "@mattb.tech/graphique-sign": "1.0.0",
-    "@mattb.tech/graphique-random": "1.0.0",
     "@mattb.tech/graphique-maths": "1.0.0",
+    "@mattb.tech/graphique-random": "1.0.0",
+    "@mattb.tech/graphique-sign": "1.0.0",
     "geometric": "^2.2.3",
     "seed-random": "^2.2.0",
     "simplex-noise": "^2.4.0"
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@types/geometric": "^2.2.0",
     "@types/seed-random": "^2.2.0",
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }

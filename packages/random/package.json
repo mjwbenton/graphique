@@ -13,7 +13,10 @@
   ],
   "scripts": {
     "build": "../../scripts/build.sh",
-    "clean": "../../scripts/clean.sh"
+    "clean": "../../scripts/clean.sh",
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-maths": "1.0.0",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "@types/seed-random": "^2.2.0",
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }

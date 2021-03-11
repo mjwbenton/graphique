@@ -14,13 +14,17 @@
   ],
   "scripts": {
     "build": "../../scripts/build.sh",
-    "clean": "../../scripts/clean.sh"
+    "clean": "../../scripts/clean.sh",
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-sketches": "1.0.0",
     "canvas": "^2.6.1"
   },
   "devDependencies": {
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }

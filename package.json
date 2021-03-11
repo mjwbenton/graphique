@@ -5,11 +5,13 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "workspaces": [
-    "./packages/*"
+    "packages/*"
   ],
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
+    "check": "yarn workspaces run check",
+    "fix": "yarn workspaces run fix",
     "dev": "yarn workspace @mattb.tech/graphique-site run dev"
   }
 }

@@ -12,6 +12,9 @@
   "scripts": {
     "build": "../../scripts/build.sh",
     "clean": "../../scripts/clean.sh",
+    "check": "../../scripts/check.sh",
+    "dev": "../../scripts/watch.sh",
+    "fix": "../../scripts/fix.sh",
     "deploy": "npm run build && cdk deploy --profile mattb.tech-deploy --require-approval never",
     "diff": "npm run build && cdk diff --profile mattb.tech-deploy"
   },
@@ -21,6 +24,7 @@
     "@aws-cdk/core": "^1.59.0",
     "@types/node": "^14.6.0",
     "aws-cdk": "^1.59.0",
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }

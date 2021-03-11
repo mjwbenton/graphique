@@ -12,7 +12,9 @@
   "scripts": {
     "clean": "rm -Rf .next",
     "build": "next build",
-    "dev": "next dev"
+    "dev": "next dev",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-sketches": "1.0.0",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.46",
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }

@@ -14,10 +14,13 @@
   "scripts": {
     "build": "../../scripts/build.sh",
     "clean": "../../scripts/clean.sh",
-    "watch": "../../scripts/watch.sh"
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
   },
   "dependencies": {},
   "devDependencies": {
+    "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }
 }
