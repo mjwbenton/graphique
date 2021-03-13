@@ -1,6 +1,7 @@
 import sign from "@mattb.tech/graphique-sign";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import { polygonCentroid } from "geometric";
+import Colour from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = 2;
 
@@ -49,11 +50,24 @@ export function sketch({
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
+  const baseColour = new Colour({
+    hue: random.degrees(),
+    saturation: 50,
+    lightness: 50,
+  });
+
   // Off-white background
-  ctx.fillStyle = `hsl(${random.scaled(0, 360)}, 40%, 97%)`;
+  ctx.fillStyle = baseColour.desaturate(10).lighten(45).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = `hsl(${random.scaled(0, 360)}, 60%, 70%)`;
+  // Use colour complementary to the background colour as stroke colour
+  ctx.strokeStyle = baseColour
+    .saturate(10)
+    .darken(20)
+    .createComplementaryPalette()
+    .select(1)
+    .toHSL();
+
   subdivideSpace(canvas, {
     width: DIVISION_SIZE_X,
     height: DIVISION_SIZE_Y,
