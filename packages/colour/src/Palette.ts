@@ -14,6 +14,17 @@ export default class Palette {
   }
 
   selectRandom(): Colour {
-    return this.colours[random.scaledInt(0, this.colours.length - 1)];
+    return this.select(random.scaledInt(0, this.size() - 1));
+  }
+
+  size(): number {
+    return this.colours.length;
+  }
+
+  select(index: number): Colour {
+    if (index >= this.size()) {
+      throw new Error(`Index ${index} larger than palette size ${this.size()}`);
+    }
+    return this.colours[index];
   }
 }
