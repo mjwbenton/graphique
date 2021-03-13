@@ -2,6 +2,7 @@ import SimplexNoise from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
+import Colour from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = 1;
 
@@ -62,19 +63,24 @@ export function sketch({
   }
 
   // Off-white background
-  ctx.fillStyle = `hsl(${random.scaled(0, 360)}, 30%, 95%)`;
+  ctx.fillStyle = new Colour({
+    hue: random.degrees(),
+    saturation: 30,
+    lightness: 95,
+  }).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Rings
-  const baseColor = random.scaled(0, 360);
-  const saturation = random.scaled(30, 90);
+  const baseColour = new Colour({
+    hue: random.degrees(),
+    saturation: random.scaled(30, 90),
+    lightness: 40,
+  });
   [...Array(numberOfCircles).keys()].forEach((i) => {
     const radius = max_radius - i * distanceBetweenCircles;
-    ctx.fillStyle = `hsl(${baseColor}, ${saturation}%, ${linearScale(
-      radius,
-      [min_radius, max_radius],
-      [40, 90]
-    )}%)`;
+    ctx.fillStyle = baseColour
+      .lighten(linearScale(radius, [min_radius, max_radius], [0, 50]))
+      .toHSL();
     ctx.beginPath();
     pointsForCircle(radius, [canvas.width / 2, canvas.height / 2]).forEach(
       ([x, y]) => {
