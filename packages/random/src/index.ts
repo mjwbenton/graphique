@@ -17,4 +17,6 @@ export default {
   next: source,
   scaled: (min: number, max: number) =>
     linearScale(source(), [0, 1], [min, max]),
+  scaledInt: (min: number, max: number) =>
+    Math.floor(linearScale(source(), [0, 1], [min, max + 1])),
 };
