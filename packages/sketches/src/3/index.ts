@@ -2,6 +2,7 @@ import SimplexNoise from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
+import Colour from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = 3;
 
@@ -43,9 +44,6 @@ export function sketch({
   );
   const minNoiseOffset = maxNoiseOffset * -1;
 
-  const baseColor = random.scaled(0, 360);
-  const saturation = random.scaled(30, 90);
-
   function pointsForCircle(
     radius: number,
     [centerx, centery]: [number, number]
@@ -68,9 +66,17 @@ export function sketch({
     });
   }
 
+  const baseColour = new Colour({
+    hue: random.degrees(),
+    saturation: 50,
+    lightness: 50,
+  });
+
   // Off-white background
-  ctx.fillStyle = `hsl(${baseColor}, 30%, 95%)`;
+  ctx.fillStyle = baseColour.lighten(47).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const palette = baseColour.saturate(20).createTriadPalette();
 
   POSITION_OF_SHAPES.forEach((shapePosition) => {
     const wider = canvas.width > canvas.height;
@@ -80,15 +86,13 @@ export function sketch({
     const centerx = wider
       ? (canvas.width / (NUMBER_OF_SHAPES + 1)) * shapePosition
       : canvas.width / 2;
-    const color = (baseColor + 120 * shapePosition) % 360;
+    const color = palette.next();
 
     [...Array(numberOfCircles).keys()].forEach((i) => {
       const radius = max_radius - i * distanceBetweenCircles;
-      ctx.fillStyle = `hsl(${color}, ${saturation}%, ${linearScale(
-        radius,
-        [min_radius, max_radius],
-        [40, 70]
-      )}%)`;
+      ctx.fillStyle = color
+        .lighten(linearScale(radius, [min_radius, max_radius], [0, 30]))
+        .toHSL();
       ctx.beginPath();
       pointsForCircle(radius, [centerx, centery]).forEach(([x, y]) => {
         ctx.lineTo(x, y);
