@@ -13,10 +13,13 @@ export function getSeed() {
   return currentSeed;
 }
 
+const scaled = (min: number, max: number) =>
+  linearScale(source(), [0, 1], [min, max]);
+
 export default {
   next: source,
-  scaled: (min: number, max: number) =>
-    linearScale(source(), [0, 1], [min, max]),
-  scaledInt: (min: number, max: number) =>
-    Math.floor(linearScale(source(), [0, 1], [min, max + 1])),
+  scaled,
+  scaledInt: (min: number, max: number) => Math.floor(scaled(min, max + 1)),
+  degrees: () => scaled(0, 360),
+  percent: () => scaled(0, 100),
 };
