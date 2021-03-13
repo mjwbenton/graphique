@@ -1,0 +1,28 @@
+{
+  "name": "@mattb.tech/graphique-colour",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Utilities to work with colours",
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "scripts": {
+    "build": "../../scripts/build.sh",
+    "clean": "../../scripts/clean.sh",
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
+  },
+  "dependencies": {
+    "@mattb.tech/graphique-random": "1.0.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "^3.9.7"
+  }
+}
