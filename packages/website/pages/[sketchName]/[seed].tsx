@@ -16,7 +16,7 @@ export default function Sketch() {
   return (
     <div
       onClick={() => {
-        router.push(
+        router.replace(
           router.route,
           `/${sketchName}/${Math.random().toString(36).substr(2, 5)}`
         );
