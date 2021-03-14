@@ -68,12 +68,21 @@ export default class Colour {
     });
   }
 
+  createPaletteWith(
+    ...createFuncs: ReadonlyArray<(base: Colour) => Colour>
+  ): Palette {
+    return new Palette([this, ...createFuncs.map((f) => f(this))]);
+  }
+
   createTriadPalette(): Palette {
-    return new Palette([this, this.shiftHue(120), this.shiftHue(240)]);
+    return this.createPaletteWith(
+      (c) => c.shiftHue(120),
+      (c) => c.shiftHue(240)
+    );
   }
 
   createComplementaryPalette(): Palette {
-    return new Palette([this, this.shiftHue(180)]);
+    return this.createPaletteWith((c) => c.shiftHue(180));
   }
 }
 
