@@ -18,6 +18,7 @@ export default function Home() {
         <Sketch sketch="1" />
         <Sketch sketch="2" />
         <Sketch sketch="3" />
+        <Sketch sketch="4" />
       </div>
     </div>
   );
