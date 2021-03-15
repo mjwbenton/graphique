@@ -19,6 +19,7 @@
     "fix": "../../scripts/fix.sh"
   },
   "dependencies": {
+    "@mattb.tech/graphique-maths": "1.0.0",
     "@mattb.tech/graphique-random": "1.0.0"
   },
   "devDependencies": {
