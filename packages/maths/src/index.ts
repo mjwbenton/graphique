@@ -14,3 +14,15 @@ export function radiansToDegrees(radians: number): number {
 export function degreesToRadians(degrees: number): number {
   return degrees * (Math.PI / 180);
 }
+
+export function addPercentTo(value: number, percent: number): number {
+  return value + value * (percent / 100);
+}
+
+export function subtractPercentFrom(value: number, percent: number): number {
+  return addPercentTo(value, percent * -1);
+}
+
+export function percentOf(value: number, percent: number): number {
+  return value * (percent / 100);
+}
