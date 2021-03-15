@@ -13,6 +13,10 @@ export default class Palette {
     return colour;
   }
 
+  forEach(callbackfn: (value: Colour, index: number) => void): void {
+    this.colours.forEach(callbackfn);
+  }
+
   selectRandom(): Colour {
     return this.select(random.scaledInt(0, this.size() - 1));
   }
