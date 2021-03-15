@@ -52,8 +52,6 @@ export function sketch({
 
   const baseColour = new Colour({
     hue: random.degrees(),
-    saturation: 50,
-    lightness: 50,
   });
 
   // Off-white background
