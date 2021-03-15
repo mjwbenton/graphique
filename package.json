@@ -5,6 +5,11 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "workspaces": [
+    "packages/maths",
+    "packages/sign",
+    "packages/random",
+    "packages/colour",
+    "packages/sketches",
     "packages/*"
   ],
   "scripts": {
