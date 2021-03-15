@@ -1,6 +1,6 @@
 import SimplexNoise from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
-import { linearScale } from "@mattb.tech/graphique-maths";
+import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import Colour from "@mattb.tech/graphique-colour";
 
@@ -51,7 +51,7 @@ export function sketch({
     return [...Array(CIRCLE_POINTS).keys()].map((point) => {
       const deg = linearScale(point, [0, CIRCLE_POINTS], [0, 360]);
       const noiseIndexDegs = (deg + radius) % 360;
-      const radians = deg * (Math.PI / 180);
+      const radians = degreesToRadians(deg);
       const noisyRadius =
         radius +
         linearScale(
