@@ -8,3 +8,4 @@ yarn-error.log
 *.d.ts
 !next-env.d.ts
 packages/sketches/sketches
+packages/sketches/src/index.ts

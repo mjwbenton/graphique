@@ -5,8 +5,10 @@
   "description": "Gernerative art",
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
+  "main": "sketches/index.js",
   "scripts": {
-    "build": "../../scripts/build.sh",
+    "build": "yarn generate-index && ../../scripts/build.sh",
+    "generate-index": "ts-node ./src/generateIndex.ts",
     "clean": "../../scripts/clean.sh",
     "dev": "../../scripts/watch.sh",
     "check": "../../scripts/check.sh",
@@ -25,6 +27,7 @@
     "@types/geometric": "^2.2.0",
     "@types/seed-random": "^2.2.0",
     "prettier": "^2.2.1",
+    "ts-node": "^9.1.1",
     "typescript": "^3.9.7"
   }
 }

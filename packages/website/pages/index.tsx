@@ -1,4 +1,5 @@
 import Link from "next/link";
+import sketches from "@mattb.tech/graphique-sketches";
 
 function Sketch({ sketch }: { sketch: string }) {
   return (
@@ -15,10 +16,9 @@ export default function Home() {
     <div className="m-8 space-y-10">
       <h1 className="text-5xl italic underline">Graphique</h1>
       <div className="flex space-x-8">
-        <Sketch sketch="1" />
-        <Sketch sketch="2" />
-        <Sketch sketch="3" />
-        <Sketch sketch="4" />
+        {sketches.map((sketch) => (
+          <Sketch sketch={sketch} key={sketch} />
+        ))}
       </div>
     </div>
   );
