@@ -9,6 +9,7 @@ export interface GradientColourPoint {
 export default class Gradient {
   private colours: Array<GradientColourPoint>;
   private direction: number;
+  private position: [number, number];
 
   constructor(
     private readonly ctx: CanvasRenderingContext2D,
@@ -16,6 +17,7 @@ export default class Gradient {
   ) {
     this.colours = [{ colour: startColour, distance: 0 }];
     this.direction = 0;
+    this.position = [0, 0];
   }
 
   private normalize(): void {
@@ -55,16 +57,21 @@ export default class Gradient {
     return this;
   }
 
+  moveTo(position: [number, number]): Gradient {
+    this.position = position;
+    return this;
+  }
+
   toCanvasGradient(): CanvasGradient {
     const radians = degreesToRadians(this.direction);
     const cosAtAngle = Math.cos(radians);
     const sinAtAngle = Math.sin(radians);
 
     const gradient = this.ctx.createLinearGradient(
-      cosAtAngle * this.firstPoint().distance,
-      sinAtAngle * this.firstPoint().distance,
-      cosAtAngle * this.lastPoint().distance,
-      sinAtAngle * this.lastPoint().distance
+      cosAtAngle * this.firstPoint().distance + this.position[0],
+      sinAtAngle * this.firstPoint().distance + this.position[1],
+      cosAtAngle * this.lastPoint().distance + this.position[0],
+      sinAtAngle * this.lastPoint().distance + this.position[1]
     );
 
     this.colours.forEach(({ colour, distance }) => {
