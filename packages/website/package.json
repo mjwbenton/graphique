@@ -11,12 +11,14 @@
   ],
   "scripts": {
     "clean": "rm -Rf .next",
-    "build": "next build",
-    "dev": "next dev",
+    "build": "npm run copy-thumbnails && next build",
+    "dev": "npm run copy-thumbnails && next dev",
     "check": "../../scripts/check.sh",
-    "fix": "../../scripts/fix.sh"
+    "fix": "../../scripts/fix.sh",
+    "copy-thumbnails": "cp -R ../sketch-thumbnails/thumbnails public/"
   },
   "dependencies": {
+    "@mattb.tech/graphique-sketch-thumbnails": "1.0.0",
     "@mattb.tech/graphique-sketches": "1.0.0",
     "autoprefixer": "^10.1.0",
     "canvas": "^2.6.1",
