@@ -1,0 +1,28 @@
+{
+  "name": "@mattb.tech/graphique-sketch-thumbnails",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Thumbnails of sketches",
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "files": [
+    "package.json",
+    "dist",
+    "images"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "../../scripts/build.sh && node dist/generateThumbnails.js",
+    "clean": "../../scripts/clean.sh",
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mattb.tech/graphique-sketches": "1.0.0",
+    "canvas": "^2.6.1",
+    "prettier": "^2.2.1",
+    "typescript": "^3.9.7"
+  }
+}
