@@ -6,6 +6,10 @@
   "author": "Matt Benton <m@mattb.tech>",
   "license": "UNLICENSED",
   "main": "sketches/index.js",
+  "files": [
+    "package.json",
+    "sketches"
+  ],
   "scripts": {
     "build": "yarn generate-index && ../../scripts/build.sh",
     "generate-index": "ts-node ./src/generateIndex.ts",
