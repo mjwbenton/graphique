@@ -1,6 +1,6 @@
+.DS_Store
 dist
 node_modules
-*.png
 yarn-error.log
 .next
 *.js
@@ -9,5 +9,4 @@ yarn-error.log
 !next-env.d.ts
 packages/sketches/sketches
 packages/sketches/src/index.ts
-.DS_Store
-thumbnails
+packages/website/public/thumbnails

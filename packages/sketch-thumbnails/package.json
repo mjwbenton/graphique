@@ -8,11 +8,11 @@
   "files": [
     "package.json",
     "dist",
-    "images"
+    "thumbnails"
   ],
-  "main": "dist/index.js",
   "scripts": {
-    "build": "../../scripts/build.sh && node dist/generateThumbnails.js",
+    "generate-thumbnails": "node dist/generateThumbnails.js",
+    "build": "../../scripts/build.sh",
     "clean": "../../scripts/clean.sh",
     "dev": "../../scripts/watch.sh",
     "check": "../../scripts/check.sh",
