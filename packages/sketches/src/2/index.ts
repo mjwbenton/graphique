@@ -9,7 +9,7 @@ const DIVISION_SIZE_X = 200;
 const DIVISION_SIZE_Y = 200;
 const POINT_BOX_MARGIN = 10;
 
-function subdivideSpace(
+export function subdivideSpace(
   { width: areaWidth, height: areaHeight }: { width: number; height: number },
   {
     width: subdivisionWidth,
@@ -34,8 +34,8 @@ function subdivideSpace(
       bottom: outerMarginY - margin + subdivisionHeight * (y + 1),
       left: outerMarginX + margin + subdivisionWidth * x,
       right: outerMarginX - margin + subdivisionWidth * (x + 1),
-      width: subdivisionWidth,
-      height: subdivisionHeight,
+      width: subdivisionWidth - 2 * margin,
+      height: subdivisionHeight - 2 * margin,
     }))
   );
 }
