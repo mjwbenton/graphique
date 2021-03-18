@@ -8,7 +8,7 @@ export default class Palette {
   }
 
   next(): Colour {
-    const colour = this.colours[this.pointer];
+    const colour = this.colours[this.pointer % this.colours.length];
     this.pointer++;
     return colour;
   }
