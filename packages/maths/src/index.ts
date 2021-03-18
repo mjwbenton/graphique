@@ -26,3 +26,11 @@ export function subtractPercentFrom(value: number, percent: number): number {
 export function percentOf(value: number, percent: number): number {
   return value * (percent / 100);
 }
+
+export function isOdd(value: number): boolean {
+  return value % 2 === 1;
+}
+
+export function isEven(value: number): boolean {
+  return value % 2 === 0;
+}
