@@ -36,6 +36,16 @@ export function isEven(value: number): boolean {
 }
 
 /*
+ * Find the distance between two points.
+ * Always returns a positive number.
+ */
+export function distanceBetween(p0: [number, number], p1: [number, number]) {
+  const xDistance = p1[0] - p0[0];
+  const yDistance = p1[1] - p0[1];
+  return Math.sqrt(xDistance ** 2 + yDistance ** 2);
+}
+
+/*
  * Find the angle of the vector between two points.
  * The same as `arc()` 0 degrees is a horizontal line right.
  */
