@@ -18,6 +18,7 @@
     "clean": "yarn workspaces run clean",
     "check": "yarn workspaces run check",
     "fix": "yarn workspaces run fix",
+    "test": "yarn workspaces run test",
     "dev": "yarn workspace @mattb.tech/graphique-site run dev",
     "generate-thumbnails": "yarn workspace @mattb.tech/graphique-sketch-thumbnails run generate-thumbnails"
   }

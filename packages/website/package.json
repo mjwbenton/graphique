@@ -15,6 +15,7 @@
     "dev": "npm run copy-thumbnails && next dev",
     "check": "../../scripts/check.sh",
     "fix": "../../scripts/fix.sh",
+    "test": "../../scripts/test.sh",
     "copy-thumbnails": "cp -R ../sketch-thumbnails/thumbnails public/"
   },
   "dependencies": {

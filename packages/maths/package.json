@@ -16,11 +16,15 @@
     "clean": "../../scripts/clean.sh",
     "dev": "../../scripts/watch.sh",
     "check": "../../scripts/check.sh",
-    "fix": "../../scripts/fix.sh"
+    "fix": "../../scripts/fix.sh",
+    "test": "../../scripts/test.sh"
   },
   "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "jest": "^26.6.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^26.5.4",
     "typescript": "^3.9.7"
   }
 }

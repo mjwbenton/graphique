@@ -17,7 +17,8 @@
     "clean": "../../scripts/clean.sh",
     "dev": "../../scripts/watch.sh",
     "check": "../../scripts/check.sh",
-    "fix": "../../scripts/fix.sh"
+    "fix": "../../scripts/fix.sh",
+    "test": "../../scripts/test.sh"
   },
   "dependencies": {
     "@mattb.tech/graphique-sketches": "1.0.0",
