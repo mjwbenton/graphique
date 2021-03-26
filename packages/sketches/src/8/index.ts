@@ -1,6 +1,10 @@
 import Colour from "@mattb.tech/graphique-colour";
 import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
-import { linearScale, radiansToDegrees } from "@mattb.tech/graphique-maths";
+import {
+  linearScale,
+  angleBetween,
+  distanceBetween,
+} from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 
@@ -36,7 +40,7 @@ export function sketch({
   drawTriangle(ctx, baseTriangle);
 
   // Overlay triangles
-  const numberOfTriangles = random.scaledInt(4, 8);
+  const numberOfTriangles = 8; //random.scaledInt(4, 8);
   const triangles = [baseTriangle];
   for (let i = 0; i < numberOfTriangles; i++) {
     const selectedTriangle =
@@ -52,7 +56,7 @@ function createSubdividedTriangle(
   triangle: Triangle
 ): Triangle {
   const selectedPointNumber = random.scaledInt(0, 2);
-  const movePercent = 30; //random.scaled(15, 45);
+  const movePercent = random.scaled(20, 40);
   const selectedPoint = triangle[selectedPointNumber];
   const nextPoint = triangle[(selectedPointNumber + 1) % 3];
   const previousPoint = triangle[(selectedPointNumber + 2) % 3];
@@ -65,31 +69,16 @@ function createSubdividedTriangle(
     selectedPointNumber === 1 ? newPoint : triangle[1],
     selectedPointNumber === 2 ? newPoint : triangle[2],
   ];
-  const hypotenuse = distance(newPoint, previousPoint);
-  const adjacent = previousPoint[1] - newPoint[1];
-  let angle = radiansToDegrees(Math.acos(adjacent / hypotenuse));
-  if (selectedPointNumber === 1 && movePercent > 50) {
-    angle = 180 + (180 - angle);
-  }
-  if (selectedPointNumber === 2) {
-    angle = angle * -1;
-  }
   const newColour = new Colour({ hue: random.degrees(), saturation: 75 });
   ctx.fillStyle = new Gradient(ctx, newColour.darken(5))
     .addColour(newColour, 0.01)
-    .addColour(newColour.decreaseOpacity(40), 1)
-    .spreadOver(hypotenuse)
-    .rotate(angle)
+    .addColour(newColour.decreaseOpacity(random.scaled(10, 90)), 1)
     .moveTo(newPoint)
+    .rotate(angleBetween(newPoint, nextPoint) + 90)
+    .spreadOver(distanceBetween(newPoint, previousPoint))
     .toCanvasGradient();
   drawTriangle(ctx, newTriangle);
   return newTriangle;
-}
-
-function distance(p1: [number, number], p2: [number, number]) {
-  const xDistance = p2[0] - p1[0];
-  const yDistance = p2[1] - p1[1];
-  return Math.sqrt(xDistance ** 2 + yDistance ** 2);
 }
 
 function drawTriangle(ctx: CanvasRenderingContext2D, points: Triangle) {
