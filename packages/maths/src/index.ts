@@ -34,3 +34,15 @@ export function isOdd(value: number): boolean {
 export function isEven(value: number): boolean {
   return value % 2 === 0;
 }
+
+/*
+ * Find the angle of the vector between two points.
+ * The same as `arc()` 0 degrees is a horizontal line right.
+ */
+export function angleBetween(p0: [number, number], p1: [number, number]) {
+  const offset = p1[0] < p0[0] ? 180 : 360;
+  return (
+    (radiansToDegrees(Math.atan((p1[1] - p0[1]) / (p1[0] - p0[0]))) + offset) %
+    360
+  );
+}
