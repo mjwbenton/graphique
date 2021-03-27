@@ -16,6 +16,7 @@ async function main() {
   sketch({
     canvas,
     seed,
+    createCanvas,
   });
   const filename = `graphique-${sketchName}-${seed}.png`;
   const output = createWriteStream(filename);

@@ -1,6 +1,13 @@
 import { useLayoutEffect, useRef } from "react";
 import useWindowSize from "./useWindowSize";
 
+function createCanvas(width: number, height: number) {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  return canvas;
+}
+
 export default async function dynamicSketchComponent(
   sketchName: string,
   seed: string
@@ -16,7 +23,7 @@ export default async function dynamicSketchComponent(
       const canvas = canvasEl.current!;
       canvas.width = width * devicePixelRatio;
       canvas.height = height * devicePixelRatio;
-      sketch({ canvas, seed });
+      sketch({ canvas, seed, createCanvas });
     });
     return <canvas style={{ height, width }} ref={canvasEl}></canvas>;
   };

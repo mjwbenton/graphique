@@ -26,6 +26,7 @@ async function generateThumbnails() {
       sketch({
         canvas,
         seed: sketchId,
+        createCanvas,
       });
       const filename = path.join(
         __dirname,
