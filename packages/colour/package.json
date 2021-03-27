@@ -21,9 +21,11 @@
   },
   "dependencies": {
     "@mattb.tech/graphique-maths": "1.0.0",
-    "@mattb.tech/graphique-random": "1.0.0"
+    "@mattb.tech/graphique-random": "1.0.0",
+    "color-convert": "^2.0.1"
   },
   "devDependencies": {
+    "@types/color-convert": "^2.0.0",
     "prettier": "^2.2.1",
     "typescript": "^3.9.7"
   }

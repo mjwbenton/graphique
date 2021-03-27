@@ -1,4 +1,5 @@
 import Palette from "./Palette";
+import convert from "color-convert";
 
 export interface ColourParams {
   readonly hue: number;
@@ -30,6 +31,10 @@ export default class Colour {
     if (this.opacity > 1 || this.opacity < 0) {
       throw new Error(`Invalid opacity ${this.opacity}`);
     }
+  }
+
+  toRBGValues(): [number, number, number] {
+    return convert.hsl.rgb([this.hue, this.saturation, this.lightness]);
   }
 
   toHSL(): string {
