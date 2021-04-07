@@ -23,20 +23,30 @@ export function subdivideSpace(
   right: number;
   width: number;
   height: number;
+  centerx: number;
+  centery: number;
 }[] {
   const numberX = Math.floor(areaWidth / subdivisionWidth);
   const numberY = Math.floor(areaHeight / subdivisionHeight);
   const outerMarginX = (areaWidth % subdivisionWidth) / 2;
   const outerMarginY = (areaHeight % subdivisionHeight) / 2;
   return [...Array(numberY).keys()].flatMap((y) =>
-    [...Array(numberX).keys()].map((x) => ({
-      top: outerMarginY + margin + subdivisionHeight * y,
-      bottom: outerMarginY - margin + subdivisionHeight * (y + 1),
-      left: outerMarginX + margin + subdivisionWidth * x,
-      right: outerMarginX - margin + subdivisionWidth * (x + 1),
-      width: subdivisionWidth - 2 * margin,
-      height: subdivisionHeight - 2 * margin,
-    }))
+    [...Array(numberX).keys()].map((x) => {
+      const top = outerMarginY + margin + subdivisionHeight * y;
+      const bottom = outerMarginY - margin + subdivisionHeight * (y + 1);
+      const left = outerMarginX + margin + subdivisionWidth * x;
+      const right = outerMarginX - margin + subdivisionWidth * (x + 1);
+      return {
+        top,
+        bottom,
+        left,
+        right,
+        width: subdivisionWidth - 2 * margin,
+        height: subdivisionHeight - 2 * margin,
+        centery: (top + bottom) / 2,
+        centerx: (left + right) / 2,
+      };
+    })
   );
 }
 
