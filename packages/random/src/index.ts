@@ -17,7 +17,7 @@ const scaled = (min: number, max: number) =>
   linearScale(source(), [0, 1], [min, max]);
 
 export default {
-  next: source,
+  next: () => source(),
   scaled,
   scaledInt: (min: number, max: number) => Math.floor(scaled(min, max + 1)),
   degrees: () => scaled(0, 360),
