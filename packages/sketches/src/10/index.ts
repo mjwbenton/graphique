@@ -7,11 +7,11 @@ import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
 
 const SKETCH_ID = "10";
-const LENGTH = 30;
-const WIDTH = 10;
-const NOISE_SCALE = 0.0017;
+const LENGTH = 50;
+const WIDTH = 20;
+const NOISE_SCALE = 0.0005;
 
-const DIVISION_SIZE = 10;
+const DIVISION_SIZE = 25;
 
 export function sketch({
   canvas,
@@ -27,15 +27,18 @@ export function sketch({
     hue: random.degrees(),
   });
 
-  // Off-white background
-  const backgroundColour = baseColour.desaturate(10).lighten(45);
-  ctx.fillStyle = backgroundColour.toHSL();
+  ctx.fillStyle = baseColour.lighten(20).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Use same colour for stroke
   ctx.lineWidth = WIDTH;
   ctx.lineCap = "round";
 
+  const strokeColour = baseColour
+    .createComplementaryPalette()
+    .select(1)
+    .decreaseOpacity(0.15)
+    .saturate(5)
+    .lighten(10);
   const noiseGenerator = new SimplexNoise(random.next);
 
   subdivideSpace(canvas, {
@@ -51,10 +54,6 @@ export function sketch({
     );
     const xDiff = Math.cos(degreesToRadians(degrees)) * LENGTH;
     const yDiff = Math.sin(degreesToRadians(degrees)) * LENGTH;
-    const strokeColour = baseColour
-      .decreaseOpacity(0.15)
-      .saturate(5)
-      .lighten(10);
     ctx.strokeStyle = new Gradient(ctx, strokeColour)
       .addColour(strokeColour.shiftHue(degrees).lighten(10), 1)
       .rotate(degrees)
