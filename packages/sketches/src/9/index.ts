@@ -3,7 +3,7 @@ import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import SimplexNoise from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { linearScale } from "@mattb.tech/graphique-maths";
-import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
+import { Gradient } from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = 9;
 

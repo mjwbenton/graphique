@@ -1,5 +1,5 @@
 import Colour from "@mattb.tech/graphique-colour";
-import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
+import { Gradient } from "@mattb.tech/graphique-colour";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";

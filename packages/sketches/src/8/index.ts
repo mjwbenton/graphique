@@ -1,5 +1,5 @@
 import Colour from "@mattb.tech/graphique-colour";
-import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
+import { Gradient } from "@mattb.tech/graphique-colour";
 import {
   linearScale,
   angleBetween,

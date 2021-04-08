@@ -3,7 +3,7 @@ import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import { polygonCentroid } from "geometric";
 import Colour from "@mattb.tech/graphique-colour";
 import { subdivideSpace } from "../2";
-import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
+import { Gradient } from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = "5";
 

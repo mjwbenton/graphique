@@ -4,7 +4,7 @@ import Colour from "@mattb.tech/graphique-colour";
 import { subdivideSpace } from "../2";
 import SimplexNoise from "simplex-noise";
 import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
-import Gradient from "@mattb.tech/graphique-colour/dist/Gradient";
+import { Gradient } from "@mattb.tech/graphique-colour";
 
 const SKETCH_ID = "10";
 const LENGTH = 50;
