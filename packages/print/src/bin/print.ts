@@ -32,8 +32,15 @@ const app = command({
       short: "h",
       defaultValue: () => DEFAULT_H,
     }),
+    devicePixelRatio: option({
+      type: number,
+      long: "device-pixel-ratio",
+      short: "dp",
+      defaultValue: () => 1,
+    }),
   },
-  async handler({ sketch: sketchName, seed, width, height }) {
+  async handler({ sketch: sketchName, seed, width, height, devicePixelRatio }) {
+    global.devicePixelRatio = devicePixelRatio;
     const canvas = createCanvas(width, height);
     const { sketch } = await import(
       `@mattb.tech/graphique-sketches/sketches/${sketchName}`
