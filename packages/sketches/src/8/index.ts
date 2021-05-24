@@ -23,13 +23,17 @@ export function sketch({
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
-  // Background
-  const baseColour = new Colour({ hue: random.degrees() });
-  ctx.fillStyle = baseColour.lighten(47).toHSL();
+  // Background colour
+  ctx.fillStyle = new Colour({
+    hue: 60,
+    saturation: 50,
+    lightness: 97,
+  }).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // Base triangle
-  const baseLength = Math.min(canvas.width, canvas.height) * (15 / 16);
+  const baseColour = new Colour({ hue: random.degrees() });
+  const baseLength = Math.min(canvas.width, canvas.height) * (14 / 16);
   const height = Math.sqrt(baseLength ** 2 - (baseLength / 2) ** 2);
   const baseTriangle: Triangle = [
     [canvas.width / 2, canvas.height / 2 - height / 2],
