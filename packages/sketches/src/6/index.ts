@@ -3,7 +3,7 @@ import { Gradient } from "@mattb.tech/graphique-colour";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
-import SimplexNoise from "simplex-noise";
+import { createNoise2D } from "simplex-noise";
 
 const SKETCH_ID = 6;
 
@@ -15,7 +15,7 @@ export function sketch({
   seed: string;
 }) {
   resetRandomness(seed);
-  const noise = new SimplexNoise(random.next);
+  const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const waveBaseHeight = canvas.height / 4;
   const wavePoints = canvas.width;
@@ -44,7 +44,7 @@ export function sketch({
       ctx.beginPath();
       [...new Array(wavePoints).keys()].forEach((i) => {
         const offset = linearScale(
-          noise.noise2D(i * 0.0006, startY),
+          noise(i * 0.0006, startY),
           [-1, 1],
           [-1 * maxOffset, maxOffset]
         );

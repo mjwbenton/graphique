@@ -1,6 +1,6 @@
 import Colour from "@mattb.tech/graphique-colour";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
-import SimplexNoise from "simplex-noise";
+import { createNoise2D } from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import { Gradient } from "@mattb.tech/graphique-colour";
@@ -52,7 +52,7 @@ export function sketch({
     ctx.fill();
   });
 
-  const noiseGenerator = new SimplexNoise(random.next);
+  const noiseGenerator = createNoise2D(random.next);
   const noiseCanvas = createCanvas(
     canvas.width / NOISE_SCALE_FACTOR,
     canvas.height / NOISE_SCALE_FACTOR
@@ -67,7 +67,7 @@ export function sketch({
   for (let x = 0; x < noiseCanvas.width; x++) {
     for (let y = 0; y < noiseCanvas.height; y++) {
       const index = y * noiseCanvas.width * 4 + x * 4;
-      const noise = noiseGenerator.noise2D(x * 0.15, y * 0.15);
+      const noise = noiseGenerator(x * 0.15, y * 0.15);
       noiseImage.data[index] = r;
       noiseImage.data[index + 1] = g;
       noiseImage.data[index + 2] = b;

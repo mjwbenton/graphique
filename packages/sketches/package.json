@@ -26,7 +26,7 @@
     "@mattb.tech/graphique-sign": "1.0.0",
     "geometric": "^2.2.3",
     "seed-random": "^2.2.0",
-    "simplex-noise": "^2.4.0"
+    "simplex-noise": "^4.0.0"
   },
   "devDependencies": {
     "@types/geometric": "^2.2.0",

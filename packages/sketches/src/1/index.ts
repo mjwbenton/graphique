@@ -1,4 +1,4 @@
-import SimplexNoise from "simplex-noise";
+import { createNoise2D } from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
@@ -30,7 +30,7 @@ export function sketch({
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const max_radius = Math.min(canvas.height, canvas.width) * 0.45;
   const min_radius = Math.min(canvas.height, canvas.width) * 0.2;
-  const noise = new SimplexNoise(random.next);
+  const noise = createNoise2D(random.next);
 
   const numberOfCircles = Math.floor(random.scaled(5, 30));
   const distanceBetweenCircles = (max_radius - min_radius) / numberOfCircles;
@@ -51,7 +51,7 @@ export function sketch({
       const noisyRadius =
         radius +
         linearScale(
-          noise.noise2D(noiseIndexDegs * 0.06, radius),
+          noise(noiseIndexDegs * 0.06, radius),
           [-1, 1],
           [minNoiseOffset, maxNoiseOffset]
         ) *

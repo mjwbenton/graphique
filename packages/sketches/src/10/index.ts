@@ -2,7 +2,7 @@ import sign from "@mattb.tech/graphique-sign";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import Colour from "@mattb.tech/graphique-colour";
 import { subdivideSpace } from "../2";
-import SimplexNoise from "simplex-noise";
+import { createNoise2D } from "simplex-noise";
 import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import { Gradient } from "@mattb.tech/graphique-colour";
 
@@ -39,7 +39,7 @@ export function sketch({
     .decreaseOpacity(0.15)
     .saturate(5)
     .lighten(10);
-  const noiseGenerator = new SimplexNoise(random.next);
+  const noiseGenerator = createNoise2D(random.next);
 
   subdivideSpace(canvas, {
     width: DIVISION_SIZE,
@@ -48,7 +48,7 @@ export function sketch({
     ctx.beginPath();
     ctx.lineTo(centerx, centery);
     const degrees = linearScale(
-      noiseGenerator.noise2D(centerx * NOISE_SCALE, centery * NOISE_SCALE),
+      noiseGenerator(centerx * NOISE_SCALE, centery * NOISE_SCALE),
       [-1, 1],
       [0, 360]
     );
