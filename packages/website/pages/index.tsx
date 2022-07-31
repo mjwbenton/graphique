@@ -4,17 +4,18 @@ import sketches from "@mattb.tech/graphique-sketches";
 
 function Sketch({ sketch }: { sketch: string }) {
   return (
-    <div className="relative p-4 mb-8 mr-8 border border-blue-500">
+    <div className="relative p-4 mb-8 mr-8 border border-gray-400 bg-orange-100 shadow-hard">
       <Link href="/[sketchName]/[seed]" as={`/${sketch}/${sketch}`}>
-        <a>
+        <a className="flex">
           <Image
             src={`/thumbnails/${sketch}-thumbnail.png`}
             alt={`Thumbnail for sketch ${sketch}`}
             width={250}
             height={250}
             layout="fixed"
+            className="bg-white"
           />
-          <div className="absolute bottom-6 left-6 text-3xl font-semibold">
+          <div className="absolute bottom-4 left-6 text-3xl font-semibold">
             {sketch}
           </div>
         </a>
