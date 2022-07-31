@@ -12,7 +12,7 @@ const CANVAS_SIZE_Y = 1000;
 async function generateThumbnails() {
   try {
     await mkdirPromise(path.join(__dirname, "..", "thumbnails"));
-  } catch (err) {
+  } catch (err: any) {
     if (err.code !== "EEXIST") {
       throw new Error(err);
     }

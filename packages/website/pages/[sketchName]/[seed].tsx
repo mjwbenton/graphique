@@ -6,6 +6,10 @@ export default function Sketch() {
   const router = useRouter();
   const { sketchName, seed } = router.query;
 
+  if (!sketchName || !seed) {
+    return null;
+  }
+
   const DynamicSketchComponent = dynamic(
     dynamicSketchComponent(sketchName as string, seed as string),
     {

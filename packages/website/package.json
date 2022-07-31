@@ -23,15 +23,15 @@
     "@mattb.tech/graphique-sketches": "1.0.0",
     "autoprefixer": "^10.1.0",
     "canvas": "^2.6.1",
-    "next": "^10.0.3",
+    "next": "^12.2.3",
     "postcss": "^8.2.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
-    "@types/react": "^16.9.46",
+    "@types/react": "^18.0.15",
     "prettier": "^2.2.1",
-    "typescript": "^3.9.7"
+    "typescript": "^4.7.4"
   }
 }
