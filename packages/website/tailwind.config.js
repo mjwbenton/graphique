@@ -1,10 +1,6 @@
 module.exports = {
-  purge: ["./pages/**/*.tsx", "./src/**/*.tsx"],
-  darkMode: false,
+  content: ["./pages/**/*.tsx", "./src/**/*.tsx"],
   theme: {
-    extend: {},
-  },
-  variants: {
     extend: {},
   },
   plugins: [],
