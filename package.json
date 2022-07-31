@@ -20,6 +20,7 @@
     "fix": "yarn workspaces run fix",
     "test": "yarn workspaces run test",
     "dev": "yarn workspace @mattb.tech/graphique-site run dev",
-    "generate-thumbnails": "yarn workspace @mattb.tech/graphique-sketch-thumbnails run generate-thumbnails"
+    "generate-thumbnails": "yarn workspace @mattb.tech/graphique-sketch-thumbnails run generate-thumbnails",
+    "cdk-deploy": "yarn workspace @mattb.tech/graphique-cdk run deploy"
   }
 }
