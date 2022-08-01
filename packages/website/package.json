@@ -21,11 +21,13 @@
   "dependencies": {
     "@mattb.tech/graphique-sketch-thumbnails": "1.0.0",
     "@mattb.tech/graphique-sketches": "1.0.0",
+    "@use-it/event-listener": "^0.1.7",
     "autoprefixer": "^10.1.0",
     "canvas": "^2.6.1",
     "next": "^12.2.3",
     "postcss": "^8.2.1",
     "react": "^18.2.0",
+    "react-aria": "^3.18.0",
     "react-dom": "^18.2.0",
     "tailwindcss": "^3.1.7"
   },

@@ -93,3 +93,7 @@ export function sketch({
 
   sign(SKETCH_ID, seed)(ctx);
 }
+
+export const meta = {
+  hello: "world",
+};
