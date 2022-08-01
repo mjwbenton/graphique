@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Graphique</title>
       </Head>
-      <div className="container font-mono">
+      <div className="font-mono">
         <Component {...pageProps} />
       </div>
     </>
