@@ -2,6 +2,7 @@ import useEventListener from "@use-it/event-listener";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
 import { useOverlay } from "react-aria";
+import Card from "../../src/Card";
 import useSketch from "../../src/useSketch";
 
 function Sketch({ sketchName, seed }: { sketchName: string; seed: string }) {
@@ -29,12 +30,9 @@ function Sketch({ sketchName, seed }: { sketchName: string; seed: string }) {
   return (
     <>
       {controlsOpen ? (
-        <div
-          className="absolute w-96 bottom-12 right-4 border border-gray-400 bg-orange-100 shadow-hard"
-          {...overlayProps}
-        >
+        <Card {...overlayProps} className="absolute w-96 bottom-12 right-4">
           {JSON.stringify(meta)}
-        </div>
+        </Card>
       ) : null}
       <div
         onClick={() => {

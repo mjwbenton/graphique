@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import sketches from "@mattb.tech/graphique-sketches";
+import Card from "../src/Card";
 
 function Sketch({ sketch }: { sketch: string }) {
   return (
-    <div className="relative p-4 mb-8 mr-8 border border-gray-400 bg-orange-100 shadow-hard">
+    <Card className="relative mb-8 mr-8">
       <Link href="/[sketchName]/[seed]" as={`/${sketch}/${sketch}`}>
         <a className="flex">
           <Image
@@ -20,7 +21,7 @@ function Sketch({ sketch }: { sketch: string }) {
           </div>
         </a>
       </Link>
-    </div>
+    </Card>
   );
 }
 
