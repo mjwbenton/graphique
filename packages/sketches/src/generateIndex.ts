@@ -8,13 +8,15 @@ const writeFile = promisify(fs.writeFile);
 async function generateIndex(): Promise<void> {
   const files = await readdir(__dirname);
   const sketches = files
-    .filter((file) => file != "index.ts" && file != "generateIndex.ts")
+    .filter((file) => !file.endsWith(".ts"))
     .sort((a, b) => parseInt(a) - parseInt(b));
   await writeFile(
     path.join(__dirname, "index.ts"),
     `
-    const SKETCHES= ${JSON.stringify(sketches)};
-    export default SKETCHES;
+export * from "./importSketch";
+export * from "./types";
+const SKETCHES= ${JSON.stringify(sketches)};
+export default SKETCHES;
     `
   );
 }

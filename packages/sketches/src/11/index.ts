@@ -7,8 +7,7 @@ import {
 } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
-
-const SKETCH_ID = 11;
+import { Sketch, SketchMeta } from "../types";
 
 const MAX_SIDES = 30;
 const MIN_SIDES = 3;
@@ -16,13 +15,7 @@ const MIN_SIDES = 3;
 type Point = [number, number];
 type Shape = Point[];
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
@@ -40,8 +33,8 @@ export function sketch({
     addShape(ctx, basePoint, baseLength, i);
   }
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
 
 function calculatePosition({
   width,
@@ -105,3 +98,8 @@ function addShape(
 function add(point: Point, point2: Point): Point {
   return [point[0] + point2[0], point[1] + point2[1]];
 }
+
+export const meta: SketchMeta = {
+  sketchName: "11",
+  defaultSeed: "t4rxd",
+};

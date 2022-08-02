@@ -4,16 +4,9 @@ import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { createNoise2D } from "simplex-noise";
+import { Sketch, SketchMeta } from "../types";
 
-const SKETCH_ID = 6;
-
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
@@ -57,5 +50,10 @@ export function sketch({
     });
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "6",
+  defaultSeed: "2t1vv",
+};

@@ -1,4 +1,4 @@
-import sketches from "@mattb.tech/graphique-sketches";
+import sketches, { importSketch } from "@mattb.tech/graphique-sketches";
 import { createCanvas } from "canvas";
 import { createWriteStream, mkdir } from "fs";
 import path from "path";
@@ -18,21 +18,19 @@ async function generateThumbnails() {
     }
   }
   await Promise.all(
-    sketches.map(async (sketchId) => {
-      const { sketch } = await import(
-        `@mattb.tech/graphique-sketches/sketches/${sketchId}`
-      );
+    sketches.map(async (sketchName) => {
+      const { sketch, meta } = await importSketch(sketchName);
       const canvas = createCanvas(CANVAS_SIZE_X, CANVAS_SIZE_Y);
       sketch({
-        canvas,
-        seed: sketchId,
-        createCanvas,
+        canvas: canvas as any,
+        seed: meta.defaultSeed,
+        createCanvas: createCanvas as any,
       });
       const filename = path.join(
         __dirname,
         "..",
         "thumbnails",
-        `${sketchId}-thumbnail.png`
+        `${sketchName}-thumbnail.png`
       );
       const output = createWriteStream(filename);
       canvas.createPNGStream().pipe(output);

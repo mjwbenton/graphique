@@ -5,21 +5,15 @@ import { subdivideSpace } from "../2";
 import { createNoise2D } from "simplex-noise";
 import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import { Gradient } from "@mattb.tech/graphique-colour";
+import { Sketch, SketchMeta } from "../types";
 
-const SKETCH_ID = "10";
 const LENGTH = 50;
 const WIDTH = 20;
 const NOISE_SCALE = 0.0005;
 
 const DIVISION_SIZE = 25;
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
@@ -64,5 +58,10 @@ export function sketch({
     ctx.stroke();
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "10",
+  defaultSeed: "gar71",
+};

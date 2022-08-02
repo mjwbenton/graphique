@@ -3,8 +3,7 @@ import sign from "@mattb.tech/graphique-sign";
 import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import Colour from "@mattb.tech/graphique-colour";
-
-const SKETCH_ID = 3;
+import { Sketch, SketchMeta } from "../types";
 
 const CIRCLE_POINTS = 720;
 const POSITION_OF_SHAPES = [1, 3, 2];
@@ -22,13 +21,7 @@ function noiseScale(degrees: number): number {
   );
 }
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const max_radius = Math.min(canvas.height, canvas.width) * 0.2;
@@ -102,5 +95,10 @@ export function sketch({
     });
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "3",
+  defaultSeed: "jm156",
+};

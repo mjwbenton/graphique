@@ -4,18 +4,11 @@ import { linearScale, isOdd } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { createNoise2D } from "simplex-noise";
-
-const SKETCH_ID = 7;
+import { Sketch, SketchMeta } from "../types";
 
 const NUMBER_OF_WAVES = 8;
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
@@ -57,5 +50,10 @@ export function sketch({
     ctx.fill();
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "7",
+  defaultSeed: "py43r",
+};

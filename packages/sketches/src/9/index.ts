@@ -4,20 +4,11 @@ import { createNoise2D } from "simplex-noise";
 import sign from "@mattb.tech/graphique-sign";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import { Gradient } from "@mattb.tech/graphique-colour";
-
-const SKETCH_ID = 9;
+import { Sketch, SketchMeta } from "../types";
 
 const NOISE_SCALE_FACTOR = 2.5;
 
-export function sketch({
-  canvas,
-  seed,
-  createCanvas,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-  createCanvas: (width: number, height: number) => HTMLCanvasElement;
-}) {
+export const sketch: Sketch = ({ canvas, seed, createCanvas }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
@@ -81,5 +72,10 @@ export function sketch({
   noiseCtx.putImageData(noiseImage, 0, 0);
   ctx.drawImage(noiseCanvas, 0, 0, canvas.width, canvas.height);
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "9",
+  defaultSeed: "ugi57",
+};

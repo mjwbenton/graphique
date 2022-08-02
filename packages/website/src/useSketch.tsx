@@ -1,3 +1,4 @@
+import { importSketch } from "@mattb.tech/graphique-sketches";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import SketchOnCanvas from "./SketchOnCanvas";
@@ -13,9 +14,7 @@ export default function useSketch({
 
   useEffect(() => {
     (async () => {
-      const { sketch, meta } = await import(
-        `@mattb.tech/graphique-sketches/sketches/${sketchName}/index.js`
-      );
+      const { sketch, meta } = await importSketch(sketchName);
       setSketchImport({ sketch, meta });
     })();
   }, [sketchName]);

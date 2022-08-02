@@ -3,16 +3,9 @@ import { Gradient } from "@mattb.tech/graphique-colour";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { percentOf } from "@mattb.tech/graphique-maths";
+import { Sketch, SketchMeta } from "../types";
 
-const SKETCH_ID = 4;
-
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
   const sectionHeight = percentOf(canvas.height, 100 / 7);
@@ -51,5 +44,10 @@ export function sketch({
     });
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "4",
+  defaultSeed: "b0bx1",
+};

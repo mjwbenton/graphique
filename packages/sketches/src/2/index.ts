@@ -2,8 +2,7 @@ import sign from "@mattb.tech/graphique-sign";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import { polygonCentroid } from "geometric";
 import Colour from "@mattb.tech/graphique-colour";
-
-const SKETCH_ID = 2;
+import { Sketch, SketchMeta } from "../types";
 
 const DIVISION_SIZE_X = 200;
 const DIVISION_SIZE_Y = 200;
@@ -50,13 +49,7 @@ export function subdivideSpace(
   );
 }
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
@@ -149,5 +142,10 @@ export function sketch({
     ctx.stroke();
   });
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
+
+export const meta: SketchMeta = {
+  sketchName: "2",
+  defaultSeed: "opkhj",
+};

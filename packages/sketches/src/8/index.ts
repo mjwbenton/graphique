@@ -7,19 +7,12 @@ import {
 } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
-
-const SKETCH_ID = 8;
+import { Sketch, SketchMeta } from "../types";
 
 type Point = [number, number];
 type Triangle = [Point, Point, Point];
 
-export function sketch({
-  canvas,
-  seed,
-}: {
-  canvas: HTMLCanvasElement;
-  seed: string;
-}) {
+export const sketch: Sketch = ({ canvas, seed }) => {
   resetRandomness(seed);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
 
@@ -52,8 +45,8 @@ export function sketch({
     triangles.push(createSubdividedTriangle(ctx, selectedTriangle));
   }
 
-  sign(SKETCH_ID, seed)(ctx);
-}
+  sign(meta.sketchName, seed)(ctx);
+};
 
 function createSubdividedTriangle(
   ctx: CanvasRenderingContext2D,
@@ -93,3 +86,8 @@ function drawTriangle(ctx: CanvasRenderingContext2D, points: Triangle) {
   ctx.closePath();
   ctx.fill();
 }
+
+export const meta: SketchMeta = {
+  sketchName: "8",
+  defaultSeed: "79cc0",
+};
