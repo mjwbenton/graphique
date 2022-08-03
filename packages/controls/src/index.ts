@@ -52,3 +52,21 @@ export function defaultValuesObject<T extends Controls>(controls: T) {
     {} as ValuesObject<T>
   );
 }
+
+const btoa =
+  typeof window !== "undefined"
+    ? window.btoa
+    : (val: string) => Buffer.from(val).toString("base64");
+
+const atob =
+  typeof window !== "undefined"
+    ? window.atob
+    : (val: string) => Buffer.from(val, "base64").toString("ascii");
+
+export function encodeValuesObject(values: ValuesObject<Controls>): string {
+  return btoa(JSON.stringify(values));
+}
+
+export function decodeValuesObject(encoded: string): ValuesObject<Controls> {
+  return JSON.parse(atob(encoded));
+}
