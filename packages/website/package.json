@@ -19,6 +19,7 @@
     "copy-thumbnails": "cp -R ../sketch-thumbnails/thumbnails public/"
   },
   "dependencies": {
+    "@mattb.tech/graphique-controls": "1.0.0",
     "@mattb.tech/graphique-sketch-thumbnails": "1.0.0",
     "@mattb.tech/graphique-sketches": "1.0.0",
     "@use-it/event-listener": "^0.1.7",

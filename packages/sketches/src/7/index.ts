@@ -1,18 +1,23 @@
 import Colour from "@mattb.tech/graphique-colour";
 import { Gradient } from "@mattb.tech/graphique-colour";
+import { number } from "@mattb.tech/graphique-controls";
 import { linearScale, isOdd } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { createNoise2D } from "simplex-noise";
 import { Sketch, SketchMeta } from "../types";
 
-const NUMBER_OF_WAVES = 8;
+const controls = [number("waves", 8)];
 
-export const sketch: Sketch = ({ canvas, seed }) => {
+export const sketch: Sketch<typeof controls> = ({
+  canvas,
+  seed,
+  controlValues: { waves },
+}) => {
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-  const waveBaseHeight = canvas.height / (2 * NUMBER_OF_WAVES);
+  const waveBaseHeight = canvas.height / (2 * waves);
   const wavePoints = canvas.width;
   const maxOffset = waveBaseHeight;
 
@@ -22,7 +27,7 @@ export const sketch: Sketch = ({ canvas, seed }) => {
   ctx.fillStyle = palette.next().lighten(20).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  [...new Array(NUMBER_OF_WAVES).keys()].forEach((waveNum) => {
+  [...new Array(waves).keys()].forEach((waveNum) => {
     const startY = waveBaseHeight * waveNum;
     const colour = palette.next();
     const gradient = new Gradient(ctx, colour)
@@ -53,7 +58,8 @@ export const sketch: Sketch = ({ canvas, seed }) => {
   sign(meta.sketchName, seed)(ctx);
 };
 
-export const meta: SketchMeta = {
+export const meta: SketchMeta<typeof controls> = {
   sketchName: "7",
   defaultSeed: "py43r",
+  controls,
 };
