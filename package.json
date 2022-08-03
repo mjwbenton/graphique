@@ -11,6 +11,7 @@
     "packages/colour",
     "packages/sketches",
     "packages/sketch-thumbnails",
+    "packages/controls",
     "packages/*"
   ],
   "scripts": {
