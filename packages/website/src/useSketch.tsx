@@ -18,7 +18,7 @@ export default function useSketch({
   controlValues,
 }: {
   sketchName: string;
-  seed: string;
+  seed: string | undefined;
   controlValues?: ValuesObject<Controls> | undefined;
 }): {
   Component: React.ComponentType<{}>;
@@ -40,10 +40,11 @@ export default function useSketch({
       ? () => (
           <SketchOnCanvas
             sketch={sketchImport.sketch}
-            seed={seed}
+            seed={seed ?? sketchImport.meta.defaultSeed}
             controlValues={
               controlValues ??
-              defaultValuesObject(sketchImport.meta.controls ?? [])
+              defaultValuesObject(sketchImport.meta.controls) ??
+              {}
             }
           />
         )
