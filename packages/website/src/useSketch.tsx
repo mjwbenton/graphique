@@ -3,7 +3,11 @@ import {
   defaultValuesObject,
   ValuesObject,
 } from "@mattb.tech/graphique-controls";
-import { importSketch, SketchExport } from "@mattb.tech/graphique-sketches";
+import {
+  importSketch,
+  SketchExport,
+  SketchMeta,
+} from "@mattb.tech/graphique-sketches";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import SketchOnCanvas from "./SketchOnCanvas";
@@ -16,7 +20,11 @@ export default function useSketch({
   sketchName: string;
   seed: string;
   controlValues?: ValuesObject<Controls> | undefined;
-}): { Component: React.ComponentType<{}>; meta: any } {
+}): {
+  Component: React.ComponentType<{}>;
+  meta: SketchMeta<Controls> | undefined;
+  defaultControlValues: ValuesObject<Controls> | undefined;
+} {
   const [sketchImport, setSketchImport] =
     useState<SketchExport<Controls> | null>(null);
 
@@ -40,6 +48,9 @@ export default function useSketch({
           />
         )
       : () => null,
-    meta: sketchImport?.meta ?? {},
+    meta: sketchImport?.meta ?? undefined,
+    defaultControlValues: sketchImport
+      ? defaultValuesObject(sketchImport.meta.controls ?? [])
+      : undefined,
   };
 }
