@@ -43,7 +43,12 @@ export function string<Name extends string>(
   };
 }
 
-export function defaultValuesObject<T extends Controls>(controls: T) {
+export function defaultValuesObject<T extends Controls>(
+  controls: T | undefined
+): ValuesObject<T> | undefined {
+  if (!controls) {
+    return undefined;
+  }
   return controls.reduce<ValuesObject<T>>(
     (acc, cur) => ({
       ...acc,
@@ -53,20 +58,27 @@ export function defaultValuesObject<T extends Controls>(controls: T) {
   );
 }
 
-const btoa =
-  typeof window !== "undefined"
-    ? window.btoa
-    : (val: string) => Buffer.from(val).toString("base64");
+const btoa = (val: string) => {
+  const encoded =
+    typeof window !== "undefined"
+      ? window.btoa(val)
+      : Buffer.from(val).toString("base64");
+  return encoded.replace(/\=+$/, "");
+};
 
 const atob =
   typeof window !== "undefined"
     ? window.atob
     : (val: string) => Buffer.from(val, "base64").toString("ascii");
 
-export function encodeValuesObject(values: ValuesObject<Controls>): string {
-  return btoa(JSON.stringify(values));
+export function encodeValuesObject(
+  values: ValuesObject<Controls> | undefined
+): string {
+  return values ? btoa(JSON.stringify(values)) : "";
 }
 
-export function decodeValuesObject(encoded: string): ValuesObject<Controls> {
-  return JSON.parse(atob(encoded));
+export function decodeValuesObject(
+  encoded: string
+): ValuesObject<Controls> | undefined {
+  return encoded ? JSON.parse(atob(encoded)) : undefined;
 }
