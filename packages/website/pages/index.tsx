@@ -6,7 +6,7 @@ import Card from "../src/Card";
 function Sketch({ sketch }: { sketch: string }) {
   return (
     <Card className="relative mb-8 mr-8">
-      <Link href="/[sketchName]/[seed]" as={`/${sketch}/${sketch}`}>
+      <Link href={`/${sketch}`}>
         <a className="flex">
           <Image
             src={`/thumbnails/${sketch}-thumbnail.png`}
