@@ -81,7 +81,32 @@ function SketchPageInner({
     <>
       {controlsOpen ? (
         <Card {...overlayProps} className="absolute w-96 bottom-16 right-8">
-          {JSON.stringify(controlValues)}
+          <textarea
+            className="w-full bg-orange-100"
+            onChange={(e) => {
+              let newEncodedControlValues;
+              try {
+                newEncodedControlValues = encodeValuesObject(
+                  JSON.parse(e.target.value)
+                );
+              } catch {
+                console.error(`Cannot encode values object: ${e.target.value}`);
+              }
+              if (newEncodedControlValues) {
+                router.replace(
+                  router.route,
+                  buildSketchURL({
+                    sketchName,
+                    seed: seed ?? meta.defaultSeed,
+                    encodedControlValues: newEncodedControlValues,
+                  }),
+                  { shallow: true }
+                );
+              }
+            }}
+          >
+            {JSON.stringify(controlValues)}
+          </textarea>
         </Card>
       ) : null}
       <div
