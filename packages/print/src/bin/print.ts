@@ -11,6 +11,7 @@ import {
 } from "cmd-ts";
 import { createCanvas } from "canvas";
 import { createWriteStream } from "fs";
+import { importSketch } from "@mattb.tech/graphique-sketches";
 
 const DEFAULT_W = 3000;
 const DEFAULT_H = 3000;
@@ -42,13 +43,11 @@ const app = command({
   async handler({ sketch: sketchName, seed, width, height, devicePixelRatio }) {
     global.devicePixelRatio = devicePixelRatio;
     const canvas = createCanvas(width, height);
-    const { sketch } = await import(
-      `@mattb.tech/graphique-sketches/sketches/${sketchName}`
-    );
+    const { sketch } = await importSketch(sketchName);
     sketch({
-      canvas,
+      canvas: canvas as any,
       seed,
-      createCanvas,
+      createCanvas: createCanvas as any,
     });
     const filename = `graphique-${sketchName}-${seed}.png`;
     const output = createWriteStream(filename);
