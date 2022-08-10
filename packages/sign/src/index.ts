@@ -1,9 +1,25 @@
-export default function sign(
-  sketchId: string | number,
-  seed: string
-): (ctx: CanvasRenderingContext2D) => void {
+import {
+  Controls,
+  encodeValuesObject,
+  ValuesObject,
+} from "@mattb.tech/graphique-controls";
+
+export default function sign({
+  sketchName,
+  seed,
+  controlValues,
+}: {
+  sketchName: string;
+  seed: string;
+  controlValues?: ValuesObject<Controls>;
+}): (ctx: CanvasRenderingContext2D) => void {
   return (ctx: CanvasRenderingContext2D) => {
-    const sign = `mattb / ${sketchId} / ${seed}`;
+    const sign = [
+      "mattb",
+      sketchName,
+      seed,
+      ...(controlValues ? [encodeValuesObject(controlValues)] : []),
+    ].join(" / ");
     const devicePixelRatio =
       global?.devicePixelRatio ??
       (typeof window !== "undefined" ? window.devicePixelRatio ?? 1 : 1);

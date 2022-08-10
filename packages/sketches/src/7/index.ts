@@ -12,12 +12,12 @@ const controls = [number("waves", 8)];
 export const sketch: Sketch<typeof controls> = ({
   canvas,
   seed,
-  controlValues: { waves },
+  controlValues,
 }) => {
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-  const waveBaseHeight = canvas.height / (2 * waves);
+  const waveBaseHeight = canvas.height / (2 * controlValues.waves);
   const wavePoints = canvas.width;
   const maxOffset = waveBaseHeight;
 
@@ -27,7 +27,7 @@ export const sketch: Sketch<typeof controls> = ({
   ctx.fillStyle = palette.next().lighten(20).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  [...new Array(waves).keys()].forEach((waveNum) => {
+  [...new Array(controlValues.waves).keys()].forEach((waveNum) => {
     const startY = waveBaseHeight * waveNum;
     const colour = palette.next();
     const gradient = new Gradient(ctx, colour)
@@ -55,7 +55,7 @@ export const sketch: Sketch<typeof controls> = ({
     ctx.fill();
   });
 
-  sign(meta.sketchName, seed)(ctx);
+  sign({ sketchName: meta.sketchName, seed, controlValues })(ctx);
 };
 
 export const meta: SketchMeta<typeof controls> = {

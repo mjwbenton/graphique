@@ -58,7 +58,7 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     ctx.stroke();
   });
 
-  sign(meta.sketchName, seed)(ctx);
+  sign({ sketchName: meta.sketchName, seed })(ctx);
 };
 
 export const meta: SketchMeta = {

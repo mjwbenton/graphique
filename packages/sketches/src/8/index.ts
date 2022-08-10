@@ -45,7 +45,7 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     triangles.push(createSubdividedTriangle(ctx, selectedTriangle));
   }
 
-  sign(meta.sketchName, seed)(ctx);
+  sign({ sketchName: meta.sketchName, seed })(ctx);
 };
 
 function createSubdividedTriangle(
