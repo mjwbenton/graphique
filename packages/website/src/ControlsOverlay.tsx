@@ -37,7 +37,7 @@ export default function ControlsOverlay({
     }
   });
 
-  return (
+  return controlsOpen ? (
     <Card {...overlayProps} className="absolute w-96 bottom-16 right-8">
       <textarea
         className="w-full bg-orange-100"
@@ -63,5 +63,5 @@ export default function ControlsOverlay({
         {JSON.stringify(controlValues)}
       </textarea>
     </Card>
-  );
+  ) : null;
 }
