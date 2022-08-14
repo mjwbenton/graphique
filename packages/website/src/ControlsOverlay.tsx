@@ -38,7 +38,11 @@ export default function ControlsOverlay({
   });
 
   return controlsOpen ? (
-    <Card {...overlayProps} className="absolute w-96 bottom-16 right-8">
+    <Card
+      ref={ref}
+      {...overlayProps}
+      className="absolute w-96 bottom-16 right-8"
+    >
       <textarea
         className="w-full bg-orange-100"
         onChange={(e) => {
