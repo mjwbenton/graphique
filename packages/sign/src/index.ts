@@ -5,20 +5,24 @@ import {
 } from "@mattb.tech/graphique-controls";
 
 export default function sign({
-  sketchName,
+  meta: { sketchName, controls },
   seed,
   controlValues,
 }: {
-  sketchName: string;
+  meta: { sketchName: string; controls?: Controls | undefined };
   seed: string;
   controlValues?: ValuesObject<Controls>;
 }): (ctx: CanvasRenderingContext2D) => void {
+  const controlValuesResult =
+    controlValues && controls
+      ? encodeValuesObject(controls, controlValues)
+      : undefined;
   return (ctx: CanvasRenderingContext2D) => {
     const sign = [
       "mattb",
       sketchName,
       seed,
-      ...(controlValues ? [encodeValuesObject(controlValues)] : []),
+      ...(controlValuesResult?.valid ? [controlValuesResult.result] : []),
     ].join(" / ");
     const devicePixelRatio =
       global?.devicePixelRatio ??
