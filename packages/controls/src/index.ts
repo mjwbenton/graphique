@@ -19,7 +19,7 @@ export type Control<
   defaultValue: Type;
 };
 
-export type Controls = Array<Control<ControlType, string>>;
+export type Controls = Readonly<Array<Control<ControlType, string>>>;
 
 export type ValuesObject<T extends Controls> = {
   [P in T[number] as P["name"]]: ControlTypeMap[P["type"]];
