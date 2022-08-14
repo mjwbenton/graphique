@@ -12,6 +12,7 @@ import {
 import { createCanvas } from "canvas";
 import { createWriteStream } from "fs";
 import { importSketch } from "@mattb.tech/graphique-sketches";
+import { defaultValuesObject } from "@mattb.tech/graphique-controls";
 
 const DEFAULT_W = 3000;
 const DEFAULT_H = 3000;
@@ -43,11 +44,12 @@ const app = command({
   async handler({ sketch: sketchName, seed, width, height, devicePixelRatio }) {
     global.devicePixelRatio = devicePixelRatio;
     const canvas = createCanvas(width, height);
-    const { sketch } = await importSketch(sketchName);
+    const { sketch, meta } = await importSketch(sketchName);
     sketch({
       canvas: canvas as any,
       seed,
       createCanvas: createCanvas as any,
+      controlValues: meta.controls ? defaultValuesObject(meta.controls) : {},
     });
     const filename = `graphique-${sketchName}-${seed}.png`;
     const output = createWriteStream(filename);

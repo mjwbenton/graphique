@@ -1,3 +1,4 @@
+import { defaultValuesObject } from "@mattb.tech/graphique-controls";
 import sketches, { importSketch } from "@mattb.tech/graphique-sketches";
 import { createCanvas } from "canvas";
 import { createWriteStream, mkdir } from "fs";
@@ -25,6 +26,7 @@ async function generateThumbnails() {
         canvas: canvas as any,
         seed: meta.defaultSeed,
         createCanvas: createCanvas as any,
+        controlValues: meta.controls ? defaultValuesObject(meta.controls) : {},
       });
       const filename = path.join(
         __dirname,
