@@ -6,6 +6,7 @@ import {
   string,
   defaultValuesObject,
   validateValuesObject,
+  defaultValuesObjectEncoded,
 } from "../src/index";
 
 describe("validateValuesObject", () => {
@@ -87,5 +88,17 @@ describe("defaultValuesObject", () => {
       number: 1,
       string: "hello",
     });
+  });
+});
+
+describe("defaultValuesObjectEncoded", () => {
+  it("returns empty string for empty controls", () => {
+    const controls: Controls = [];
+    expect(defaultValuesObjectEncoded(controls)).toStrictEqual("");
+  });
+
+  it("returns encoded value when there are controls", () => {
+    const controls = [int("number", 1), string("string", "hello")];
+    expect(defaultValuesObjectEncoded(controls)).toStrictEqual("MXxoZWxsbw");
   });
 });

@@ -64,6 +64,11 @@ export function defaultValuesObject<T extends Controls>(
   );
 }
 
+export function defaultValuesObjectEncoded(controls: Controls): string {
+  // Default values object is guaranteed to be valid, so we can just return the encoded string
+  return encodeValuesObject(controls, defaultValuesObject(controls)).result!;
+}
+
 type ValidatedResult<ResultType> =
   | {
       valid: true;
