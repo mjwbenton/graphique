@@ -72,7 +72,7 @@ export const sketch: Sketch = ({ canvas, seed, createCanvas }) => {
   noiseCtx.putImageData(noiseImage, 0, 0);
   ctx.drawImage(noiseCanvas, 0, 0, canvas.width, canvas.height);
 
-  sign({ sketchName: meta.sketchName, seed })(ctx);
+  sign({ meta, seed })(ctx);
 };
 
 export const meta: SketchMeta = {

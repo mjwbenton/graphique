@@ -1,13 +1,13 @@
 import Colour from "@mattb.tech/graphique-colour";
 import { Gradient } from "@mattb.tech/graphique-colour";
-import { number } from "@mattb.tech/graphique-controls";
+import { int } from "@mattb.tech/graphique-controls";
 import { linearScale, isOdd } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { createNoise2D } from "simplex-noise";
 import { Sketch, SketchMeta } from "../types";
 
-const controls = [number("waves", 8)];
+const controls = [int("waveCount", 8)] as const;
 
 export const sketch: Sketch<typeof controls> = ({
   canvas,
@@ -17,7 +17,7 @@ export const sketch: Sketch<typeof controls> = ({
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-  const waveBaseHeight = canvas.height / (2 * controlValues.waves);
+  const waveBaseHeight = canvas.height / (2 * controlValues.waveCount);
   const wavePoints = canvas.width;
   const maxOffset = waveBaseHeight;
 
@@ -27,7 +27,7 @@ export const sketch: Sketch<typeof controls> = ({
   ctx.fillStyle = palette.next().lighten(20).toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  [...new Array(controlValues.waves).keys()].forEach((waveNum) => {
+  [...new Array(controlValues.waveCount).keys()].forEach((waveNum) => {
     const startY = waveBaseHeight * waveNum;
     const colour = palette.next();
     const gradient = new Gradient(ctx, colour)
@@ -55,7 +55,7 @@ export const sketch: Sketch<typeof controls> = ({
     ctx.fill();
   });
 
-  sign({ sketchName: meta.sketchName, seed, controlValues })(ctx);
+  sign({ meta, seed, controlValues })(ctx);
 };
 
 export const meta: SketchMeta<typeof controls> = {
