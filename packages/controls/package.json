@@ -19,9 +19,14 @@
     "fix": "../../scripts/fix.sh",
     "test": "../../scripts/test.sh"
   },
-  "dependencies": {},
+  "dependencies": {
+    "yup": "^0.32.11"
+  },
   "devDependencies": {
+    "@types/jest": "^28.1.6",
+    "jest": "^28.1.3",
     "prettier": "^2.2.1",
+    "ts-jest": "^28.0.7",
     "typescript": "^4.7.4"
   }
 }

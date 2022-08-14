@@ -1,6 +1,9 @@
+import { btoa, atob } from "./base64";
+import * as yup from "yup";
+
 export type ControlTypeMap = {
   string: string;
-  number: number;
+  int: number;
 };
 
 export type ControlType = keyof ControlTypeMap;
@@ -11,6 +14,7 @@ export type Control<
   Type extends ControlTypeMap[TypeName] = ControlTypeMap[TypeName]
 > = {
   type: TypeName;
+  validate: (v: unknown) => boolean;
   name: Name;
   defaultValue: Type;
 };
@@ -21,12 +25,16 @@ export type ValuesObject<T extends Controls> = {
   [P in T[number] as P["name"]]: ControlTypeMap[P["type"]];
 };
 
-export function number<Name extends string>(
+const JOIN_VALUE = "|";
+
+export function int<Name extends string>(
   name: Name,
   defaultValue: number
-): Control<"number", Name> {
+): Control<"int", Name> {
   return {
-    type: "number",
+    type: "int",
+    validate: (v) =>
+      yup.number().required().integer().min(0).isValidSync(v, { strict: true }),
     name,
     defaultValue,
   };
@@ -38,17 +46,15 @@ export function string<Name extends string>(
 ): Control<"string", Name> {
   return {
     type: "string",
+    validate: (v) => yup.string().required().isValidSync(v, { strict: true }),
     name,
     defaultValue,
   };
 }
 
 export function defaultValuesObject<T extends Controls>(
-  controls: T | undefined
-): ValuesObject<T> | undefined {
-  if (!controls) {
-    return undefined;
-  }
+  controls: T
+): ValuesObject<T> {
   return controls.reduce<ValuesObject<T>>(
     (acc, cur) => ({
       ...acc,
@@ -58,27 +64,48 @@ export function defaultValuesObject<T extends Controls>(
   );
 }
 
-const btoa = (val: string) => {
-  const encoded =
-    typeof window !== "undefined"
-      ? window.btoa(val)
-      : Buffer.from(val).toString("base64");
-  return encoded.replace(/\=+$/, "");
-};
+type ValidatedResult<ResultType> =
+  | {
+      valid: true;
+      result: ResultType;
+    }
+  | { valid: false; result: undefined };
 
-const atob =
-  typeof window !== "undefined"
-    ? window.atob
-    : (val: string) => Buffer.from(val, "base64").toString("ascii");
+export function validateValuesObject(
+  controls: Controls,
+  values: ValuesObject<Controls>
+): boolean {
+  return !controls.some(({ name, validate }) => !validate(values[name]));
+}
 
 export function encodeValuesObject(
-  values: ValuesObject<Controls> | undefined
-): string {
-  return values ? btoa(JSON.stringify(values)) : "";
+  controls: Controls,
+  values: ValuesObject<Controls>
+): ValidatedResult<string> {
+  if (!validateValuesObject(controls, values)) {
+    return { valid: false, result: undefined };
+  }
+  const str = controls.map(({ name }) => values[name]).join(JOIN_VALUE);
+  return { valid: true, result: btoa(str) };
 }
 
 export function decodeValuesObject(
+  controls: Controls,
   encoded: string
-): ValuesObject<Controls> | undefined {
-  return encoded ? JSON.parse(atob(encoded)) : undefined;
+): ValidatedResult<ValuesObject<Controls>> {
+  const str = atob(encoded);
+  const valuesObject = str
+    ? Object.fromEntries(
+        str
+          .split(JOIN_VALUE)
+          .map((v, i) => [
+            controls[i].name,
+            controls[i].type === "int" ? parseFloat(v) : v,
+          ])
+      )
+    : {};
+  if (!validateValuesObject(controls, valuesObject)) {
+    return { valid: false, result: undefined };
+  }
+  return { valid: true, result: valuesObject };
 }
