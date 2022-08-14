@@ -98,7 +98,14 @@ describe("defaultValuesObjectEncoded", () => {
   });
 
   it("returns encoded value when there are controls", () => {
-    const controls = [int("number", 1), string("string", "hello")];
-    expect(defaultValuesObjectEncoded(controls)).toStrictEqual("MXxoZWxsbw");
+    const controls = [
+      int("number", 1),
+      string("string", "hello"),
+      int("anotherNumber", 100),
+      string("finalString", "foobarbaz"),
+    ];
+    expect(defaultValuesObjectEncoded(controls)).toStrictEqual(
+      "65y6gsbcdhqqrc9g61y6cvvfc9gq4rk1f8"
+    );
   });
 });

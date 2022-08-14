@@ -1,4 +1,4 @@
-import { btoa, atob } from "./base64";
+import { encode, decode } from "./encoding";
 import * as yup from "yup";
 
 export type ControlTypeMap = {
@@ -91,14 +91,14 @@ export function encodeValuesObject(
     return { valid: false, result: undefined };
   }
   const str = controls.map(({ name }) => values[name]).join(JOIN_VALUE);
-  return { valid: true, result: btoa(str) };
+  return { valid: true, result: encode(str) };
 }
 
 export function decodeValuesObject(
   controls: Controls,
   encoded: string
 ): ValidatedResult<ValuesObject<Controls>> {
-  const str = atob(encoded);
+  const str = decode(encoded);
   const valuesObject = str
     ? Object.fromEntries(
         str
