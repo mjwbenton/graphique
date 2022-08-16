@@ -6,12 +6,12 @@
   "license": "UNLICENSED",
   "workspaces": [
     "packages/maths",
+    "packages/controls",
     "packages/sign",
     "packages/random",
     "packages/colour",
     "packages/sketches",
     "packages/sketch-thumbnails",
-    "packages/controls",
     "packages/*"
   ],
   "scripts": {
