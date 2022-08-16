@@ -4,6 +4,7 @@ import { degreesToRadians, linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import Colour from "@mattb.tech/graphique-colour";
 import { Sketch, SketchMeta } from "../types";
+import { int } from "@mattb.tech/graphique-controls";
 
 const CIRCLE_POINTS = 720;
 
@@ -90,4 +91,5 @@ export const sketch: Sketch = ({ canvas, seed }) => {
 export const meta: SketchMeta = {
   sketchName: "1",
   defaultSeed: "0m5a9",
+  controls: [],
 };

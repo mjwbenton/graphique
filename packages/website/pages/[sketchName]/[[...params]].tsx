@@ -20,8 +20,8 @@ export default function SketchPage() {
   return (
     <SketchPageInner
       sketchName={sketchName as string}
-      seed={seed}
-      encodedControlValues={encodedControlValues}
+      seed={seed as string | undefined}
+      encodedControlValues={encodedControlValues as string | undefined}
     />
   );
 }
@@ -33,43 +33,36 @@ function SketchPageInner({
 }: {
   sketchName: string;
   seed: string | undefined;
-  encodedControlValues?: string | undefined;
+  encodedControlValues: string | undefined;
 }) {
   const router = useRouter();
   const { Component, meta } = useSketch(sketchName);
 
   if (!meta || !Component) {
-    // TODO: Loading state? Maybe use suspense?
     return null;
   }
 
   // If we don't have a seed we need to redirect to include it in the URL
   // If we don't have control values when this sketch has controls we need to redirect to include it in the URL
-  if (!seed || (meta.controls && !encodedControlValues)) {
-    const newSeed = seed ?? meta.defaultSeed;
-    const newEncodedControlValues = meta.controls
-      ? encodedControlValues ?? defaultValuesObjectEncoded(meta.controls)
-      : undefined;
+  if (!seed || (meta.controls.length > 0 && !encodedControlValues)) {
     visitSketchUrl({
       router,
       sketchName,
-      seed: newSeed,
-      encodedControlValues: newEncodedControlValues,
+      seed: seed ?? meta.defaultSeed,
+      encodedControlValues:
+        encodedControlValues ?? defaultValuesObjectEncoded(meta.controls),
     });
     return null;
   }
 
-  let controlValues: ValuesObject<Controls> = {};
-  if (meta.controls && encodedControlValues) {
-    const decodedResult = decodeValuesObject(
-      meta.controls,
-      encodedControlValues
-    );
-    if (!decodedResult.valid) {
-      throw new Error("Invalid control values!");
-    }
-    controlValues = decodedResult.result;
+  const decodedResult = decodeValuesObject(
+    meta.controls,
+    encodedControlValues ?? ""
+  );
+  if (!decodedResult.valid) {
+    throw new Error("Invalid control values!");
   }
+  const controlValues = decodedResult.result;
 
   return (
     <>

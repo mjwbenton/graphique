@@ -50,4 +50,5 @@ export const sketch: Sketch = ({ canvas, seed }) => {
 export const meta: SketchMeta = {
   sketchName: "4",
   defaultSeed: "b0bx1",
+  controls: [],
 };

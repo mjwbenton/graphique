@@ -134,4 +134,5 @@ export const sketch: Sketch = ({ canvas, seed }) => {
 export const meta: SketchMeta = {
   sketchName: "5",
   defaultSeed: "7zztg",
+  controls: [],
 };

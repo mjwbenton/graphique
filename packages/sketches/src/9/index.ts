@@ -78,4 +78,5 @@ export const sketch: Sketch = ({ canvas, seed, createCanvas }) => {
 export const meta: SketchMeta = {
   sketchName: "9",
   defaultSeed: "ugi57",
+  controls: [],
 };

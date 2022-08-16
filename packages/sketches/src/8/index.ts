@@ -90,4 +90,5 @@ function drawTriangle(ctx: CanvasRenderingContext2D, points: Triangle) {
 export const meta: SketchMeta = {
   sketchName: "8",
   defaultSeed: "79cc0",
+  controls: [],
 };

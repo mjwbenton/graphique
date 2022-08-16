@@ -26,7 +26,7 @@ async function generateThumbnails() {
         canvas: canvas as any,
         seed: meta.defaultSeed,
         createCanvas: createCanvas as any,
-        controlValues: meta.controls ? defaultValuesObject(meta.controls) : {},
+        controlValues: defaultValuesObject(meta.controls),
       });
       const filename = path.join(
         __dirname,

@@ -102,4 +102,5 @@ function add(point: Point, point2: Point): Point {
 export const meta: SketchMeta = {
   sketchName: "11",
   defaultSeed: "t4rxd",
+  controls: [],
 };

@@ -49,7 +49,7 @@ const app = command({
       canvas: canvas as any,
       seed,
       createCanvas: createCanvas as any,
-      controlValues: meta.controls ? defaultValuesObject(meta.controls) : {},
+      controlValues: defaultValuesObject(meta.controls),
     });
     const filename = `graphique-${sketchName}-${seed}.png`;
     const output = createWriteStream(filename);

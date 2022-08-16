@@ -53,6 +53,7 @@ describe("encodeValuesObject/decodeValuesObject", () => {
     const values = {};
     const { result: encoded } = encodeValuesObject(controls, values);
     const { result: decoded } = decodeValuesObject(controls, encoded!);
+    expect(encoded).toStrictEqual("");
     expect(decoded).toStrictEqual(values);
   });
 
