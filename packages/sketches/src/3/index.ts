@@ -95,10 +95,11 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     });
   });
 
-  sign({ sketchName: meta.sketchName, seed })(ctx);
+  sign({ meta, seed })(ctx);
 };
 
 export const meta: SketchMeta = {
   sketchName: "3",
   defaultSeed: "jm156",
+  controls: [],
 };

@@ -12,7 +12,7 @@ export interface Sketch<T extends Controls = []> {
 export interface SketchMeta<T extends Controls = []> {
   sketchName: string;
   defaultSeed: string;
-  controls?: T;
+  controls: T;
 }
 
 export interface SketchExport<T extends Controls = []> {

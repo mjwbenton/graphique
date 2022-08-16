@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
 import {
   decodeValuesObject,
-  defaultValuesObject,
-  encodeValuesObject,
+  defaultValuesObjectEncoded,
+  ValuesObject,
+  Controls,
 } from "@mattb.tech/graphique-controls";
-import useEventListener from "@use-it/event-listener";
-import { useRef, useState } from "react";
-import { useOverlay } from "react-aria";
 import useSketch from "../../src/useSketch";
 import newSeed from "../../src/newSeed";
-import Card from "../../src/Card";
+import ControlsOverlay from "../../src/ControlsOverlay";
+import visitSketchUrl from "../../src/visitSketchUrl";
 
 export default function SketchPage() {
   const router = useRouter();
@@ -21,8 +20,8 @@ export default function SketchPage() {
   return (
     <SketchPageInner
       sketchName={sketchName as string}
-      seed={seed}
-      encodedControlValues={encodedControlValues}
+      seed={seed as string | undefined}
+      encodedControlValues={encodedControlValues as string | undefined}
     />
   );
 }
@@ -34,110 +33,58 @@ function SketchPageInner({
 }: {
   sketchName: string;
   seed: string | undefined;
-  encodedControlValues?: string | undefined;
+  encodedControlValues: string | undefined;
 }) {
   const router = useRouter();
-  const [controlsOpen, setControlsOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const { overlayProps } = useOverlay(
-    {
-      isOpen: controlsOpen,
-      isDismissable: true,
-    },
-    ref
-  );
+  const { Component, meta } = useSketch(sketchName);
 
-  useEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === ".") {
-      setControlsOpen(!controlsOpen);
-    }
-  });
-
-  const controlValues = encodedControlValues
-    ? decodeValuesObject(encodedControlValues)
-    : undefined;
-
-  const { Component, meta } = useSketch({
-    sketchName,
-    seed,
-    controlValues,
-  });
+  if (!meta || !Component) {
+    return null;
+  }
 
   // If we don't have a seed we need to redirect to include it in the URL
   // If we don't have control values when this sketch has controls we need to redirect to include it in the URL
-  if (meta && (!seed || (!encodedControlValues && meta.controls))) {
-    router.replace(
-      router.route,
-      buildSketchURL({
-        sketchName,
-        seed: seed ?? meta.defaultSeed,
-        encodedControlValues:
-          encodedControlValues ??
-          encodeValuesObject(defaultValuesObject(meta.controls)),
-      })
-    );
+  if (!seed || (meta.controls.length > 0 && !encodedControlValues)) {
+    visitSketchUrl({
+      router,
+      sketchName,
+      seed: seed ?? meta.defaultSeed,
+      encodedControlValues:
+        encodedControlValues ?? defaultValuesObjectEncoded(meta.controls),
+    });
+    return null;
   }
+
+  const decodedResult = decodeValuesObject(
+    meta.controls,
+    encodedControlValues ?? ""
+  );
+  if (!decodedResult.valid) {
+    throw new Error("Invalid control values!");
+  }
+  const controlValues = decodedResult.result;
+
   return (
     <>
-      {controlsOpen ? (
-        <Card {...overlayProps} className="absolute w-96 bottom-16 right-8">
-          <textarea
-            className="w-full bg-orange-100"
-            onChange={(e) => {
-              let newEncodedControlValues;
-              try {
-                newEncodedControlValues = encodeValuesObject(
-                  JSON.parse(e.target.value)
-                );
-              } catch {
-                console.error(`Cannot encode values object: ${e.target.value}`);
-              }
-              if (newEncodedControlValues) {
-                router.replace(
-                  router.route,
-                  buildSketchURL({
-                    sketchName,
-                    seed: seed ?? meta.defaultSeed,
-                    encodedControlValues: newEncodedControlValues,
-                  }),
-                  { shallow: true }
-                );
-              }
-            }}
-          >
-            {JSON.stringify(controlValues)}
-          </textarea>
-        </Card>
+      {meta.controls ? (
+        <ControlsOverlay
+          meta={meta}
+          seed={seed}
+          controlValues={controlValues}
+        />
       ) : null}
       <div
         onClick={() => {
-          router.replace(
-            router.route,
-            buildSketchURL({
-              sketchName,
-              seed: newSeed(),
-              encodedControlValues,
-            }),
-            { shallow: true }
-          );
+          visitSketchUrl({
+            router,
+            sketchName,
+            seed: newSeed(),
+            encodedControlValues,
+          });
         }}
       >
-        <Component />
+        <Component controlValues={controlValues} seed={seed} />
       </div>
     </>
   );
-}
-
-function buildSketchURL({
-  sketchName,
-  seed,
-  encodedControlValues,
-}: {
-  sketchName: string;
-  seed: string;
-  encodedControlValues?: string | undefined;
-}) {
-  return `/${sketchName}/${seed}${
-    encodedControlValues ? `/${encodedControlValues}` : ""
-  }`;
 }

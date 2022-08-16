@@ -128,10 +128,11 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     ctx.stroke();
   });
 
-  sign({ sketchName: meta.sketchName, seed })(ctx);
+  sign({ meta, seed })(ctx);
 };
 
 export const meta: SketchMeta = {
   sketchName: "5",
   defaultSeed: "7zztg",
+  controls: [],
 };

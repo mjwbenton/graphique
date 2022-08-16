@@ -19,7 +19,9 @@
     "fix": "../../scripts/fix.sh",
     "test": "../../scripts/test.sh"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@mattb.tech/graphique-controls": "1.0.0"
+  },
   "devDependencies": {
     "@mattb.tech/graphique-sketches": "1.0.0",
     "canvas": "^2.6.1",

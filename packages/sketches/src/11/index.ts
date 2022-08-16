@@ -33,7 +33,7 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     addShape(ctx, basePoint, baseLength, i);
   }
 
-  sign({ sketchName: meta.sketchName, seed })(ctx);
+  sign({ meta, seed })(ctx);
 };
 
 function calculatePosition({
@@ -102,4 +102,5 @@ function add(point: Point, point2: Point): Point {
 export const meta: SketchMeta = {
   sketchName: "11",
   defaultSeed: "t4rxd",
+  controls: [],
 };
