@@ -1,0 +1,27 @@
+{
+  "name": "@mattb.tech/graphique-flickr-image",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Load an image from flickr into the sketch",
+  "author": "Matt Benton <m@mattb.tech>",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "scripts": {
+    "build": "../../scripts/build.sh",
+    "clean": "../../scripts/clean.sh",
+    "dev": "../../scripts/watch.sh",
+    "check": "../../scripts/check.sh",
+    "fix": "../../scripts/fix.sh",
+    "test": "../../scripts/test.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "typescript": "^4.7.4"
+  }
+}

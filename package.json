@@ -10,6 +10,7 @@
     "packages/sign",
     "packages/random",
     "packages/colour",
+    "packages/flickr-image",
     "packages/sketches",
     "packages/sketch-thumbnails",
     "packages/*"
