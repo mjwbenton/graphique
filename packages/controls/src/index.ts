@@ -4,6 +4,7 @@ import * as yup from "yup";
 export type ControlTypeMap = {
   string: string;
   int: number;
+  percentage: number;
 };
 
 export type ControlType = keyof ControlTypeMap;
@@ -35,6 +36,19 @@ export function int<Name extends string>(
     type: "int",
     validate: (v) =>
       yup.number().required().integer().min(0).isValidSync(v, { strict: true }),
+    name,
+    defaultValue,
+  };
+}
+
+export function percentage<Name extends string>(
+  name: Name,
+  defaultValue: number
+): Control<"percentage", Name> {
+  return {
+    type: "percentage",
+    validate: (v) =>
+      yup.number().required().min(0).max(1).isValidSync(v, { strict: true }),
     name,
     defaultValue,
   };
@@ -105,7 +119,7 @@ export function decodeValuesObject(
           .split(JOIN_VALUE)
           .map((v, i) => [
             controls[i].name,
-            controls[i].type === "int" ? parseFloat(v) : v,
+            controls[i].type !== "string" ? parseFloat(v) : v,
           ])
       )
     : {};
