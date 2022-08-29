@@ -21,18 +21,18 @@ export default async function writeFlickrImageToCanvas(
   id: string,
   canvas: HTMLCanvasElement
 ) {
-  const imageUrl = selectUrlFromResponse(
-    await request(ENDPOINT, QUERY, { id })
-  );
-  if (!imageUrl) {
+  const image = selectImageFromResponse(await request(ENDPOINT, QUERY, { id }));
+  if (!image) {
     throw new Error(`Cannot find image with id ${id}`);
   }
-  const img = await loadImageData(imageUrl);
-  canvas.getContext("2d")?.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const img = await loadImageData(image.url);
+  canvas.getContext("2d")?.drawImage(img, 0, 0, image.width, image.height);
 }
 
-function selectUrlFromResponse(response: any): string | undefined {
-  return response?.photo?.sources[0]?.url;
+function selectImageFromResponse(
+  response: any
+): { url: string; width: number; height: number } | undefined {
+  return response?.photo?.sources[0];
 }
 
 async function loadImageData(url: string): Promise<CanvasImageSource> {
