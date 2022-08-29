@@ -6,7 +6,7 @@ export interface Sketch<T extends Controls = []> {
     seed: string;
     createCanvas: (width: number, height: number) => HTMLCanvasElement;
     controlValues: ValuesObject<T>;
-  }): void;
+  }): void | Promise<void>;
 }
 
 export interface SketchMeta<T extends Controls = []> {

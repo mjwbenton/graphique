@@ -45,7 +45,7 @@ const app = command({
     global.devicePixelRatio = devicePixelRatio;
     const canvas = createCanvas(width, height);
     const { sketch, meta } = await importSketch(sketchName);
-    sketch({
+    await sketch({
       canvas: canvas as any,
       seed,
       createCanvas: createCanvas as any,

@@ -22,7 +22,7 @@ async function generateThumbnails() {
     sketches.map(async (sketchName) => {
       const { sketch, meta } = await importSketch(sketchName);
       const canvas = createCanvas(CANVAS_SIZE_X, CANVAS_SIZE_Y);
-      sketch({
+      await sketch({
         canvas: canvas as any,
         seed: meta.defaultSeed,
         createCanvas: createCanvas as any,
