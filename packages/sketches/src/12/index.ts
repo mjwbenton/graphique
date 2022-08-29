@@ -22,7 +22,7 @@ function noiseScale(degrees: number): number {
 }
 
 const controls = [
-  string("flickrId", "52248360410"),
+  string("flickrId", "52269343516"),
   percentage("posX", 0.3),
   percentage("posY", 0.2),
   percentage("maxRadius", 0.15),
