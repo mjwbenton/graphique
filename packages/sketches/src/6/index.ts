@@ -1,28 +1,50 @@
 import Colour from "@mattb.tech/graphique-colour";
 import { Gradient } from "@mattb.tech/graphique-colour";
+import { int, percentage } from "@mattb.tech/graphique-controls";
 import { linearScale } from "@mattb.tech/graphique-maths";
 import random, { resetRandomness } from "@mattb.tech/graphique-random";
 import sign from "@mattb.tech/graphique-sign";
 import { createNoise2D } from "simplex-noise";
 import { Sketch, SketchMeta } from "../types";
 
-export const sketch: Sketch = ({ canvas, seed }) => {
+const controls = [
+  int("waveCount", 3),
+  percentage("saturation", 0.5),
+  percentage("lightness", 0.5),
+] as const;
+
+export const sketch: Sketch<typeof controls> = ({
+  canvas,
+  seed,
+  controlValues,
+}) => {
   resetRandomness(seed);
   const noise = createNoise2D(random.next);
   const ctx: CanvasRenderingContext2D = canvas.getContext("2d")!;
-  const waveBaseHeight = canvas.height / 4;
+  const waveBaseHeight = canvas.height / (controlValues.waveCount + 1);
   const wavePoints = canvas.width;
   const maxOffset = waveBaseHeight;
 
+  const saturation = controlValues.saturation * 100;
+  const lightness = controlValues.lightness * 100;
+
   // Background
-  ctx.fillStyle = new Colour({ hue: random.degrees() }).lighten(20).toHSL();
+  ctx.fillStyle = new Colour({
+    hue: random.degrees(),
+    saturation,
+    lightness,
+  })
+    .lighten(100 - lightness * 1.6)
+    .toHSL();
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  [...new Array(3).keys()].forEach((i) => {
+  [...new Array(controlValues.waveCount).keys()].forEach((i) => {
     const startY = waveBaseHeight * (i + 1);
     const baseColour = new Colour({
       hue: random.degrees(),
+      saturation,
       opacity: 0.5,
+      lightness,
     });
     baseColour.createTriadPalette().forEach((colour, i) => {
       const palette = colour.createPaletteWith((c) => c.decreaseOpacity(0.5));
@@ -50,11 +72,11 @@ export const sketch: Sketch = ({ canvas, seed }) => {
     });
   });
 
-  sign({ meta, seed })(ctx);
+  sign({ meta, seed, controlValues })(ctx);
 };
 
-export const meta: SketchMeta = {
+export const meta: SketchMeta<typeof controls> = {
   sketchName: "6",
   defaultSeed: "2t1vv",
-  controls: [],
+  controls,
 };
