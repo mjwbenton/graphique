@@ -30,9 +30,12 @@ export const sketch: Sketch<typeof controls> = async ({
     saturation: 0,
     lightness: 10,
   });
-
   ctx.strokeStyle = baseColor.toHSL();
   ctx.lineWidth = 4;
+
+  const palette = new Colour({ hue: random.degrees() })
+    .saturate(20)
+    .createTriadPalette();
 
   [...new Array(boxes)].forEach((_, i) => {
     [...new Array(boxes)].forEach((_, j) => {
@@ -43,11 +46,9 @@ export const sketch: Sketch<typeof controls> = async ({
         boxSize,
       ] as const;
       if (random.next() <= fillChance) {
-        ctx.fillStyle = new Gradient(
-          ctx,
-          baseColor.lighten(random.scaledInt(-10, 20))
-        )
-          .addColour(baseColor.lighten(random.scaledInt(30, 80)), 1)
+        const selectedColor = palette.selectRandom();
+        ctx.fillStyle = new Gradient(ctx, selectedColor)
+          .addColour(selectedColor.lighten(random.scaledInt(30, 80)), 1)
           .spreadOver(boxSize * 1.5)
           .rotate(random.scaled(15, 75))
           .moveTo([box[0], box[1]])
@@ -76,6 +77,6 @@ export const sketch: Sketch<typeof controls> = async ({
 
 export const meta: SketchMeta<typeof controls> = {
   sketchName: "13",
-  defaultSeed: "u29t7",
+  defaultSeed: "pxqoq",
   controls,
 };
