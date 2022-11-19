@@ -31,4 +31,8 @@ export default class Palette {
     }
     return this.colours[index];
   }
+
+  combine(newPallette: Palette): Palette {
+    return new Palette([...this.colours, ...newPallette.colours]);
+  }
 }
